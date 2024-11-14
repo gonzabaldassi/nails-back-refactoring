@@ -4,6 +4,7 @@ import jsges.nails.domain.articulos.Linea;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
 import jsges.nails.service.articulos.ILineaService;
+import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,10 @@ public class LineaController {
     @Autowired
     private ILineaService modelService;
 
-    public LineaController() {
+    /*public LineaController() {
 
-    }
-
+    }*/
+/*
     @GetMapping({"/lineas"})
     public List<Linea> getAll() {
         logger.info("enta en  traer todas las lineas");
@@ -37,9 +38,17 @@ public class LineaController {
             listadoDTO.add(new LineaDTO(model));
         });
         return list;
+    }*/
+
+    @GetMapping({"/linea"})
+    public ResponseEntity<?> getLines() {
+        try {
+            return ResponseEntity.ok(modelService.listar());
+        } catch ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(("Error showing the lines:" + e.getMessage()));
     }
 
-
+    /*
     @GetMapping({"/lineasPageQuery"})
     public ResponseEntity<Page<LineaDTO>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                 @RequestParam(defaultValue = "${max_page}") int size) {
@@ -51,9 +60,24 @@ public class LineaController {
 
         Page<LineaDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),listadoDTO);
         return ResponseEntity.ok().body(bookPage);
+    }*/
+
+    @GetMapping({"/lineasPageQuery"})
+    public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "${max_page}") int size) {
+
+        try{
+            List<LineaDTO> lineas = modelService.listar(consulta);
+
+            Page<LineaDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),lineas);
+            return ResponseEntity.ok().body(bookPage);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error showing lines"+e.getMessage());
+        }
     }
 
-
+    /*
     @PostMapping("/linea")
     public  ResponseEntity<Linea> agregar(@RequestBody LineaDTO model){
         List<Linea> list = modelService.buscar(model.denominacion);
@@ -62,8 +86,26 @@ public class LineaController {
         }
         Linea nuevaLinea = modelService.newModel(model);
         return ResponseEntity.ok(nuevaLinea);
+    }*/
+
+    @PostMapping("/linea")
+    public ResponseEntity<?> createLine(@RequestBody LineaDTO model) {
+        try{
+            LineaDTO modelSaved = modelService.guardar(model);
+
+            if (modelSaved == null){
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("Error adding line");
+            }
+
+            return ResponseEntity.ok(modelSaved);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error adding line" + e.getMessage());
+        }
     }
 
+    /*
     @PutMapping("/lineaEliminar/{id}")
     public ResponseEntity<Linea> eliminar(@PathVariable Integer id){
         Linea model = modelService.buscarPorId(id);
@@ -74,18 +116,57 @@ public class LineaController {
         model.asEliminado();
         modelService.guardar(model);
         return ResponseEntity.ok(model);
+    }*/
+
+    @DeleteMapping("/linea/{id}")
+    public ResponseEntity<?> deleteLine(@PathVariable Integer id){
+
+        try{
+            LineaDTO modelDTO = modelService.buscarPorId(id);
+
+            if (modelDTO == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("The line with id: " + id + ", does not exist");
+            }
+
+            modelService.eliminar(modelDTO);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error deleting line" + e.getMessage());
+        }
     }
 
+    /*
     @GetMapping("/linea/{id}")
-    public ResponseEntity<LineaDTO> getPorId(@PathVariable Integer id){
+    public ResponseEntity<LineaDTO> getLineById(@PathVariable Integer id){
         Linea linea = modelService.buscarPorId(id);
         if(linea == null){
             throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
         }
         LineaDTO model = new LineaDTO(linea);
         return ResponseEntity.ok(model);
+    }*/
+
+    @GetMapping("/linea/{id}")
+    public ResponseEntity<?> getLineById(@PathVariable Integer id){
+        try{
+
+            LineaDTO modelDTO = modelService.buscarPorId(id);
+
+            if (modelDTO == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Line with id:" + id + ", does not exist");
+            }
+            return ResponseEntity.ok(modelDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error showing the line: " + e.getMessage());
+        }
     }
 
+    /*
     @PutMapping("/linea/{id}")
     public ResponseEntity<Linea> actualizar(@PathVariable Integer id,
                                             @RequestBody LineaDTO modelRecibido){
@@ -96,6 +177,31 @@ public class LineaController {
         model.setDenominacion(modelRecibido.denominacion);
         modelService.guardar(model);
         return ResponseEntity.ok(model);
+    }*/
+
+    @PutMapping("/linea/{id}")
+    public ResponseEntity<?> updateLine(@PathVariable Integer id,
+                                            @RequestBody LineaDTO modelRecibido){
+        try{
+            LineaDTO existingModelDTO = modelService.buscarPorId(id);
+
+            if (existingModelDTO == null){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("This line does not exist");
+            }
+
+            LineaDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+
+            if(updatedModelDTO == null){
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("Error updating line");
+            }
+
+            return ResponseEntity.ok(updatedModelDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error updating line" + e.getMessage());
+        }
     }
 
 }
