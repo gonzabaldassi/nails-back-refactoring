@@ -1,7 +1,7 @@
-package jsges.nails.DTO.articulos;
+package jsges.nails.dto.articulos;
 
-import jsges.nails.DTO.TipoObjetoDTO;
-import jsges.nails.domain.articulos.Linea;
+import jsges.nails.dto.TipoObjetoDTO;
+import jsges.nails.domain.items.Line;
 
 public class LineaDTO extends TipoObjetoDTO {
 
@@ -9,8 +9,8 @@ public class LineaDTO extends TipoObjetoDTO {
        super();
     }
 
-    public LineaDTO(Linea linea) {
-        this.id= linea.getId();
-        this.denominacion= linea.getDenominacion();
+    public LineaDTO(Line line) {
+        this.id= line.getId();
+        this.denominacion= line.getDenominacion();
     }
 }

@@ -1,7 +1,7 @@
 package jsges.nails.service.articulos;
 
-import jsges.nails.DTO.articulos.LineaDTO;
-import jsges.nails.domain.articulos.Linea;
+import jsges.nails.dto.articulos.LineaDTO;
+import jsges.nails.domain.items.Line;
 import jsges.nails.repository.articulos.LineaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,48 +23,48 @@ public class LineaService implements ILineaService {
     private static final Logger logger = LoggerFactory.getLogger(LineaService.class);
 
     @Override
-    public List<Linea> listar() {
+    public List<Line> listar() {
         return modelRepository.buscarNoEliminados();
     }
 
     @Override
-    public Linea buscarPorId(Integer id) {
+    public Line buscarPorId(Integer id) {
         return modelRepository.findById(id).orElse(null);
     }
 
 
 
     @Override
-    public Linea guardar(Linea model) {
+    public Line guardar(Line model) {
         return modelRepository.save(model);
     }
 
 
     @Override
-    public Linea newModel(LineaDTO modelDTO) {
-        Linea model =  new Linea(modelDTO);
+    public Line newModel(LineaDTO modelDTO) {
+        Line model =  new Line(modelDTO);
         return guardar(model);
     }
 
 
     @Override
-    public void eliminar(Linea model) {
+    public void eliminar(Line model) {
 
         modelRepository.save(model);
     }
 
     @Override
-    public List<Linea> listar(String consulta) {
+    public List<Line> listar(String consulta) {
         //logger.info("service " +consulta);
         return modelRepository.buscarNoEliminados(consulta);
     }
 
     @Override
-    public Page<Linea> getLineas(Pageable pageable) {
+    public Page<Line> getLineas(Pageable pageable) {
         return  modelRepository.findAll(pageable);
     }
 
-    public List<Linea> buscar(String consulta) {
+    public List<Line> buscar(String consulta) {
         return modelRepository.buscarExacto(consulta);
     }
 

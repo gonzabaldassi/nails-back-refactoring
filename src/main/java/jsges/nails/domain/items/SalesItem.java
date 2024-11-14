@@ -1,0 +1,59 @@
+package jsges.nails.domain.items;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import java.io.Serializable;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+
+@Table(name = "SalesItem")
+public class SalesItem implements Serializable {
+
+        /*@Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;*/
+
+        @Id
+        @Column(name = "id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
+
+        /*@Column(columnDefinition = "TEXT")
+        String denominacion;
+        int estado;*/
+
+        @NotNull(message = "Denomination can not be null")
+        @Column(columnDefinition = "TEXT")
+        private String denomination;
+
+        @Column(columnDefinition = "INTEGER")
+        private Integer state;
+
+        @NotNull(message = "Observation can not be null")
+        @Column(columnDefinition = "TEXT")
+        private String observation;
+
+        /*@ManyToOne(cascade = CascadeType.ALL)
+        private Linea linea;*/
+
+        @NotNull(message = "The line can not be empty")
+        @ManyToOne
+        @JoinColumn(name = "fk_line", referencedColumnName = "id")
+        private Line line;
+
+        /*
+        public void asEliminado() {
+               this.setEstado(1);
+        }*/
+
+        ///LOS ATRIBUTOS NO ESTABAN DEFINIDOS COMO PRIVATE, NO RESPETA ENCAPSULAMIENTO
+}
+

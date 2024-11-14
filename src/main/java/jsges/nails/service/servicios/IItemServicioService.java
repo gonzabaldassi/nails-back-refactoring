@@ -1,22 +1,21 @@
 package jsges.nails.service.servicios;
 
-import jsges.nails.domain.servicios.ItemServicio;
-import jsges.nails.domain.servicios.Servicio;
+import jsges.nails.domain.services.ServiceItem;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface IItemServicioService {
-    public List<ItemServicio> listar();
+    public List<ServiceItem> listar();
 
-    public ItemServicio buscarPorId(Integer id);
+    public ServiceItem buscarPorId(Integer id);
 
-    public ItemServicio guardar(ItemServicio model);
+    public ServiceItem guardar(ServiceItem model);
 
-    public Page<ItemServicio> findPaginated(Pageable pageable,List<ItemServicio> servicios);
+    public Page<ServiceItem> findPaginated(Pageable pageable, List<ServiceItem> servicios);
 
-    public Page<ItemServicio> getItemServicios(Pageable pageable);
+    public Page<ServiceItem> getItemServicios(Pageable pageable);
 
-    public List<ItemServicio> buscarPorServicio(Integer idServicio);
+    public List<ServiceItem> buscarPorServicio(Integer idServicio);
 }

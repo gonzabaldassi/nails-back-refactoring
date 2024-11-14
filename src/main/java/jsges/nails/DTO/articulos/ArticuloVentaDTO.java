@@ -1,7 +1,7 @@
-package jsges.nails.DTO.articulos;
+package jsges.nails.dto.articulos;
 
-import jsges.nails.DTO.TipoObjetoDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.dto.TipoObjetoDTO;
+import jsges.nails.domain.items.SalesItem;
 
 public class ArticuloVentaDTO extends TipoObjetoDTO {
 
@@ -9,7 +9,7 @@ public class ArticuloVentaDTO extends TipoObjetoDTO {
     public String denominacion;
     public Integer linea;
 
-    public ArticuloVentaDTO( ArticuloVenta model) {
+    public ArticuloVentaDTO( SalesItem model) {
         this.id = model.getId();
         this.denominacion=model.getDenominacion();
         this.linea=model.getLinea().getId();

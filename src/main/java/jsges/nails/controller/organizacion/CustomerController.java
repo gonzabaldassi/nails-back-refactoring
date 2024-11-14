@@ -1,6 +1,6 @@
 package jsges.nails.controller.organizacion;
 
-import jsges.nails.DTO.Organizacion.ClienteDTO;
+import jsges.nails.dto.Organizacion.ClienteDTO;
 import jsges.nails.service.organizacion.IClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

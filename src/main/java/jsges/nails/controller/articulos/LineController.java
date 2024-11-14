@@ -1,5 +1,5 @@
 package jsges.nails.controller.articulos;
-import jsges.nails.DTO.articulos.LineaDTO;
+import jsges.nails.dto.articulos.LineaDTO;
 import jsges.nails.service.articulos.ILineaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class LineController {
     /*public LineaController() {
 
     }*/
-/*
+    /*
     @GetMapping({"/lineas"})
     public List<Linea> getAll() {
         logger.info("enta en  traer todas las lineas");
@@ -36,11 +36,13 @@ public class LineController {
     }*/
 
     @GetMapping({"/line"})
-    public ResponseEntity<?> getLines() {
+    public ResponseEntity<?> getLines(){
         try {
             return ResponseEntity.ok(modelService.listar());
-        } catch ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(("Error showing the lines:" + e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error showing the lines:" + e.getMessage());
+        }
     }
 
     /*

@@ -1,6 +1,6 @@
 package jsges.nails.controller.articulos;
 
-import jsges.nails.DTO.articulos.ArticuloVentaDTO;
+import jsges.nails.dto.articulos.ArticuloVentaDTO;
 import jsges.nails.service.articulos.IArticuloVentaService;
 import jsges.nails.service.articulos.ILineaService;
 import org.slf4j.Logger;

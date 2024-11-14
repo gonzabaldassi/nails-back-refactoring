@@ -1,5 +1,5 @@
 package jsges.nails.controller.services;
-import jsges.nails.DTO.servicios.ServicioDTO;
+import jsges.nails.dto.servicios.ServicioDTO;
 import jsges.nails.service.servicios.IServicioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

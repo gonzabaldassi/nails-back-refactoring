@@ -1,9 +1,7 @@
-package jsges.nails.DTO.servicios;
+package jsges.nails.dto.servicios;
 
-import jsges.nails.DTO.Organizacion.ClienteDTO;
-import jsges.nails.domain.organizacion.Cliente;
-import jsges.nails.domain.servicios.ItemServicio;
-import jsges.nails.domain.servicios.Servicio;
+import jsges.nails.domain.services.ServiceItem;
+import jsges.nails.domain.services.Service;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -22,11 +20,11 @@ public class ServicioDTO{
 
     }
 
-    public ServicioDTO(Servicio elemento, List<ItemServicio>list) {
+    public ServicioDTO(Service elemento, List<ServiceItem>list) {
 
         this.id = elemento.getId();
-        this.cliente = elemento.getCliente().getId();
-        this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
+        this.cliente = elemento.getCustomer().getId();
+        this.clienteRazonSocial = elemento.getCustomer().getRazonSocial();
         this.fechaDocumento = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
 
@@ -35,11 +33,11 @@ public class ServicioDTO{
         });
     }
 
-    public ServicioDTO(Servicio elemento){
+    public ServicioDTO(Service elemento){
 
         this.id = elemento.getId();
-        this.cliente = elemento.getCliente().getId();
-        this.clienteRazonSocial = elemento.getCliente().getRazonSocial();
+        this.cliente = elemento.getCustomer().getId();
+        this.clienteRazonSocial = elemento.getCustomer().getRazonSocial();
         this.fechaDocumento = elemento.getFechaRealizacion();
         this.total= elemento.getTotal();
 

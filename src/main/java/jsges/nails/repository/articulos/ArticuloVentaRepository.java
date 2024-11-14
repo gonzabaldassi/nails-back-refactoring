@@ -1,19 +1,19 @@
 package jsges.nails.repository.articulos;
 
-import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.domain.items.SalesItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ArticuloVentaRepository extends JpaRepository<ArticuloVenta, Integer> {
+public interface ArticuloVentaRepository extends JpaRepository<SalesItem, Integer> {
 
-    @Query("select p from ArticuloVenta p  where p.estado=0 order by p.denominacion")
-    List<ArticuloVenta> buscarNoEliminados();
+    @Query("select p from SalesItem p  where p.estado=0 order by p.denominacion")
+    List<SalesItem> buscarNoEliminados();
 
 
-    @Query("SELECT p FROM ArticuloVenta p WHERE p.estado = 0 AND  p.denominacion LIKE %:consulta% ORDER BY p.denominacion")
-    List<ArticuloVenta> buscarNoEliminados(@Param("consulta") String consulta);
+    @Query("SELECT p FROM SalesItem p WHERE p.estado = 0 AND  p.denominacion LIKE %:consulta% ORDER BY p.denominacion")
+    List<SalesItem> buscarNoEliminados(@Param("consulta") String consulta);
 
 }

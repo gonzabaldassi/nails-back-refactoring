@@ -1,7 +1,7 @@
 package jsges.nails.service.organizacion;
 
-import jsges.nails.DTO.Organizacion.ClienteDTO;
-import jsges.nails.domain.organizacion.Cliente;
+import jsges.nails.dto.Organizacion.ClienteDTO;
+import jsges.nails.domain.organization.Customer;
 import jsges.nails.repository.organizacion.ClienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,32 +21,32 @@ public class ClienteService implements IClienteService {
     private ClienteRepository clienteRepository;
     private static final Logger logger = LoggerFactory.getLogger(ClienteService.class);
     @Override
-    public List<Cliente> listar() {
+    public List<Customer> listar() {
         return clienteRepository.buscarNoEliminados();
     }
 
     @Override
-    public Cliente buscarPorId(Integer id) {
-        Cliente model = clienteRepository.findById(id).orElse(null);
+    public Customer buscarPorId(Integer id) {
+        Customer model = clienteRepository.findById(id).orElse(null);
         return model;
     }
 
     @Override
-    public Cliente guardar(Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public Customer guardar(Customer customer) {
+        return clienteRepository.save(customer);
     }
 
     @Override
-    public void eliminar(Cliente cliente) {
-          clienteRepository.save(cliente);
+    public void eliminar(Customer customer) {
+          clienteRepository.save(customer);
     }
 
     @Override
-    public List<Cliente> listar(String consulta) {
+    public List<Customer> listar(String consulta) {
          return clienteRepository.buscarNoEliminados(consulta);
     }
 
-    public Page<Cliente> getClientes(Pageable pageable) {
+    public Page<Customer> getClientes(Pageable pageable) {
         return clienteRepository.findAll(pageable);
     }
 

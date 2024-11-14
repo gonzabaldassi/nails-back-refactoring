@@ -1,8 +1,7 @@
 package jsges.nails.service.articulos;
 
-import jsges.nails.DTO.articulos.LineaDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.domain.articulos.Linea;
+import jsges.nails.dto.articulos.LineaDTO;
+import jsges.nails.domain.items.Line;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,21 +9,21 @@ import java.util.List;
 
 public interface ILineaService {
 
-    public List<Linea> listar();
+    public List<Line> listar();
 
-    public Linea buscarPorId(Integer id);
+    public Line buscarPorId(Integer id);
 
-    public Linea guardar(Linea model);
+    public Line guardar(Line model);
 
-    public void eliminar(Linea model);
+    public void eliminar(Line model);
 
-    public List<Linea> listar(String consulta);
-    public Page<Linea> getLineas(Pageable pageable);
+    public List<Line> listar(String consulta);
+    public Page<Line> getLineas(Pageable pageable);
 
     public Page<LineaDTO> findPaginated(Pageable pageable,List<LineaDTO> lineas);
 
 
-    public List<Linea> buscar(String consulta);
+    public List<Line> buscar(String consulta);
 
-    public Linea newModel(LineaDTO model);
+    public Line newModel(LineaDTO model);
 }

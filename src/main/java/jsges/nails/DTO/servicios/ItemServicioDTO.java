@@ -1,6 +1,6 @@
-package jsges.nails.DTO.servicios;
+package jsges.nails.dto.servicios;
 
-import jsges.nails.domain.servicios.ItemServicio;
+import jsges.nails.domain.services.ServiceItem;
 import lombok.Data;
 
 @Data
@@ -11,7 +11,7 @@ public class ItemServicioDTO {
     private Double precio;
     private String observaciones;
 
-    public ItemServicioDTO(ItemServicio model) {
+    public ItemServicioDTO(ServiceItem model) {
         this.observaciones=model.getObservacion();
         this.precio=model.getPrecio();
         this.tipoServicio=model.getTipoServicio().getDenominacion();

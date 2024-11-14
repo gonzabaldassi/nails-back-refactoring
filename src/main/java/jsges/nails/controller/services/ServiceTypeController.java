@@ -1,8 +1,8 @@
 package jsges.nails.controller.services;
 
 
-import jsges.nails.DTO.servicios.TipoServicioDTO;
-import jsges.nails.domain.servicios.TipoServicio;
+import jsges.nails.dto.servicios.TipoServicioDTO;
+import jsges.nails.domain.services.ServiceType;
 import jsges.nails.service.servicios.ITipoServicioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -142,7 +142,7 @@ public class ServiceTypeController {
                         .body("This service type does not exist");
             }
 
-            TipoServicio updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            ServiceType updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
 
             if(updatedModelDTO == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)

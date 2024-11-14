@@ -1,9 +1,6 @@
 package jsges.nails.service.servicios;
-import jsges.nails.DTO.articulos.ArticuloVentaDTO;
-import jsges.nails.DTO.servicios.ServicioDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.domain.servicios.ItemServicio;
-import jsges.nails.domain.servicios.Servicio;
+import jsges.nails.dto.servicios.ServicioDTO;
+import jsges.nails.domain.services.Service;
 import jsges.nails.repository.servicios.ServicioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 
-@Service
+@org.springframework.stereotype.Service
 public class ServicioService implements IServicioService {
 
     @Autowired
@@ -25,23 +21,23 @@ public class ServicioService implements IServicioService {
     private static final Logger logger = LoggerFactory.getLogger(ServicioService.class);
 
     @Override
-    public List<Servicio> listar() {
+    public List<Service> listar() {
         return modelRepository.buscarNoEliminados();
     }
 
     @Override
-    public Servicio buscarPorId(Integer id) {
+    public Service buscarPorId(Integer id) {
         return modelRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Servicio guardar(Servicio model) {
+    public Service guardar(Service model) {
         return modelRepository.save(model);
     }
 
 
     @Override
-    public Page<Servicio> getServicios(Pageable pageable) {
+    public Page<Service> getServicios(Pageable pageable) {
         return  modelRepository.findAll(pageable);
     }
 
@@ -67,7 +63,7 @@ public class ServicioService implements IServicioService {
     }
 
     @Override
-    public List<Servicio> listar(String consulta) {
+    public List<Service> listar(String consulta) {
         //logger.info("service " +consulta);
         return modelRepository.buscarNoEliminados(consulta);
     }

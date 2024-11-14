@@ -1,5 +1,5 @@
-package jsges.nails.DTO.Organizacion;
-import jsges.nails.domain.organizacion.Cliente;
+package jsges.nails.dto.Organizacion;
+import jsges.nails.domain.organization.Customer;
 import lombok.Data;
 
 import java.util.Date;
@@ -15,7 +15,7 @@ public class ClienteDTO {
     private Date fechaInicio;
     private Date fechaNacimiento;
 
-    public ClienteDTO(Cliente model) {
+    public ClienteDTO(Customer model) {
         this.id = model.getId();
         this.razonSocial=model.getRazonSocial();
         this.celular=model.getCelular();

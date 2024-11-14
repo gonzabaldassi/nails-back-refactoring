@@ -1,7 +1,7 @@
 package jsges.nails.service.articulos;
 
-import jsges.nails.DTO.articulos.ArticuloVentaDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.dto.articulos.ArticuloVentaDTO;
+import jsges.nails.domain.items.SalesItem;
 import jsges.nails.repository.articulos.ArticuloVentaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,33 +23,33 @@ public class ArticuloVentaService implements IArticuloVentaService{
 
 
     @Override
-    public List<ArticuloVenta> listar() {
+    public List<SalesItem> listar() {
         return modelRepository.buscarNoEliminados();
     }
 
     @Override
-    public ArticuloVenta buscarPorId(Integer id) {
+    public SalesItem buscarPorId(Integer id) {
         return modelRepository.findById(id).orElse(null);
     }
 
     @Override
-    public ArticuloVenta guardar(ArticuloVenta model) {
+    public SalesItem guardar(SalesItem model) {
         return modelRepository.save(model);
     }
 
     @Override
-    public void eliminar(ArticuloVenta model) {
+    public void eliminar(SalesItem model) {
         modelRepository.save(model);
     }
 
     @Override
-    public List<ArticuloVenta> listar(String consulta) {
+    public List<SalesItem> listar(String consulta) {
         //logger.info("service " +consulta);
         return modelRepository.buscarNoEliminados(consulta);
     }
 
     @Override
-    public Page<ArticuloVenta> getArticulos(Pageable pageable) {
+    public Page<SalesItem> getArticulos(Pageable pageable) {
         return  modelRepository.findAll(pageable);
     }
 

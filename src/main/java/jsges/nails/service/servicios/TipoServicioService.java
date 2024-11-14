@@ -1,6 +1,6 @@
 package jsges.nails.service.servicios;
-import jsges.nails.DTO.servicios.TipoServicioDTO;
-import jsges.nails.domain.servicios.TipoServicio;
+import jsges.nails.dto.servicios.TipoServicioDTO;
+import jsges.nails.domain.services.ServiceType;
 import jsges.nails.repository.servicios.TipoServicioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,59 +22,59 @@ public class TipoServicioService implements ITipoServicioService {
     private static final Logger logger = LoggerFactory.getLogger(TipoServicioService.class);
 
     @Override
-    public List<TipoServicio> listar() {
+    public List<ServiceType> listar() {
         return modelRepository.buscarNoEliminados();
     }
 
     @Override
-    public TipoServicio buscarPorId(Integer id) {
+    public ServiceType buscarPorId(Integer id) {
         return modelRepository.findById(id).orElse(null);
     }
 
 
 
     @Override
-    public TipoServicio guardar(TipoServicio model) {
+    public ServiceType guardar(ServiceType model) {
         return modelRepository.save(model);
     }
 
 
     @Override
-    public TipoServicio newModel(TipoServicioDTO modelDTO) {
-        TipoServicio model =  new TipoServicio();
+    public ServiceType newModel(TipoServicioDTO modelDTO) {
+        ServiceType model =  new ServiceType();
         model.setDenominacion(modelDTO.denominacion);
         return guardar(model);
     }
 
 
     @Override
-    public void eliminar(TipoServicio model) {
+    public void eliminar(ServiceType model) {
 
         modelRepository.save(model);
     }
 
     @Override
-    public List<TipoServicio> listar(String consulta) {
+    public List<ServiceType> listar(String consulta) {
         //logger.info("service " +consulta);
         return modelRepository.buscarNoEliminados(consulta);
     }
 
     @Override
-    public Page<TipoServicio> getTiposServicios(Pageable pageable) {
+    public Page<ServiceType> getTiposServicios(Pageable pageable) {
         return  modelRepository.findAll(pageable);
     }
 
-    public List<TipoServicio> buscar(String consulta) {
+    public List<ServiceType> buscar(String consulta) {
         return modelRepository.buscarExacto(consulta);
     }
 
 
     @Override
-    public Page<TipoServicio> findPaginated(Pageable pageable, List<TipoServicio>lineas) {
+    public Page<ServiceType> findPaginated(Pageable pageable, List<ServiceType>lineas) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<TipoServicio> list;
+        List<ServiceType> list;
         if (lineas.size() < startItem) {
             list = Collections.emptyList();
         } else {
@@ -82,8 +82,8 @@ public class TipoServicioService implements ITipoServicioService {
             list = lineas.subList(startItem, toIndex);
         }
 
-        Page<TipoServicio> bookPage
-                = new PageImpl<TipoServicio>(list, PageRequest.of(currentPage, pageSize), lineas.size());
+        Page<ServiceType> bookPage
+                = new PageImpl<ServiceType>(list, PageRequest.of(currentPage, pageSize), lineas.size());
 
         return bookPage;
     }

@@ -1,6 +1,6 @@
-package jsges.nails.DTO.servicios;
+package jsges.nails.dto.servicios;
 
-import jsges.nails.DTO.TipoObjetoDTO;
+import jsges.nails.dto.TipoObjetoDTO;
 
 public class TipoServicioDTO extends TipoObjetoDTO {
 
