@@ -34,22 +34,22 @@ public class ServiceItem implements Serializable {
     @Column(columnDefinition = "DOUBLE")
     private Double precio;
 
-    /*@ManyToOne(cascade = CascadeType.ALL)
+    @NotNull(message = "The serviceType can not be empty")
+    @ManyToOne
+    @JoinColumn(name = "fk_serviceType", referencedColumnName = "id")
+    private ServiceType serviceType;
+
+    @NotNull(message = "The service can not be empty")
+    @ManyToOne
+    @JoinColumn(name = "fk_service", referencedColumnName = "id")
+    private Service service;
+
+        /*@ManyToOne(cascade = CascadeType.ALL)
     private TipoServicio tipoServicio;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Servicio servicio;*/
-
-    @NotNull(message = "The serviceType can not be empty")
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_serviceType", referencedColumnName = "id")
-    private ServiceType serviceType;
-
-    @NotNull(message = "The service can not be empty")
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_service", referencedColumnName = "id")
-    private Service service;
 
     /*public void asEliminado() {
         this.setEstado(1);

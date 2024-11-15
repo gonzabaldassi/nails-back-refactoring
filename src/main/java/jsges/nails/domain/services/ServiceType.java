@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -18,6 +20,7 @@ import java.io.Serializable;
 @Table(name = "ServiceType")
 public class ServiceType extends ObjectType implements Serializable {
 
-    /* XD */
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServiceItem> serviceItems = new ArrayList<>();
 
 }

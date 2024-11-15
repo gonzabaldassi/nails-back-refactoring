@@ -17,18 +17,10 @@ import java.io.Serializable;
 @Table(name = "SalesItem")
 public class SalesItem implements Serializable {
 
-        /*@Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;*/
-
         @Id
         @Column(name = "id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
-
-        /*@Column(columnDefinition = "TEXT")
-        String denominacion;
-        int estado;*/
 
         @NotNull(message = "Denomination can not be null")
         @Column(columnDefinition = "TEXT")
@@ -41,13 +33,21 @@ public class SalesItem implements Serializable {
         @Column(columnDefinition = "TEXT")
         private String observation;
 
-        /*@ManyToOne(cascade = CascadeType.ALL)
-        private Linea linea;*/
-
         @NotNull(message = "The line can not be empty")
         @ManyToOne
         @JoinColumn(name = "fk_line", referencedColumnName = "id")
         private Line line;
+
+        /*@Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;*/
+
+        /*@Column(columnDefinition = "TEXT")
+        String denominacion;
+        int estado;*/
+
+        /*@ManyToOne(cascade = CascadeType.ALL)
+        private Linea linea;*/
 
         /*
         public void asEliminado() {
