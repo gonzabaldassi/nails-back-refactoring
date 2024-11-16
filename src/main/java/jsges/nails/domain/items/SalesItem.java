@@ -43,7 +43,7 @@ public class SalesItem implements Serializable {
         private Integer id;*/
 
         /*@Column(columnDefinition = "TEXT")
-        String denominacion;
+        String denomination;
         int estado;*/
 
         /*@ManyToOne(cascade = CascadeType.ALL)

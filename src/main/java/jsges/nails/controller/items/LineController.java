@@ -1,5 +1,5 @@
 package jsges.nails.controller.items;
-import jsges.nails.dto.items.LineaDTO;
+import jsges.nails.dto.items.LineDTO;
 import jsges.nails.service.items.ILineService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +60,7 @@ public class LineController {
     public ResponseEntity<?> getLineById(@PathVariable Integer id){
         try{
 
-            LineaDTO modelDTO = modelService.buscarPorId(id);
+            LineDTO modelDTO = modelService.buscarPorId(id);
 
             if (modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -92,9 +92,9 @@ public class LineController {
                                                    @RequestParam(defaultValue = "${max_page}") int size) {
 
         try{
-            List<LineaDTO> lineas = modelService.listar(consulta);
+            List<LineDTO> lineas = modelService.listar(consulta);
 
-            Page<LineaDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),lineas);
+            Page<LineDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),lineas);
             return ResponseEntity.ok().body(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -105,7 +105,7 @@ public class LineController {
     /*
     @PostMapping("/linea")
     public  ResponseEntity<Linea> agregar(@RequestBody LineaDTO model){
-        List<Linea> list = modelService.buscar(model.denominacion);
+        List<Linea> list = modelService.buscar(model.denomination);
         if (!list.isEmpty()){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
@@ -114,9 +114,9 @@ public class LineController {
     }*/
 
     @PostMapping("/line")
-    public ResponseEntity<?> createLine(@RequestBody LineaDTO model) {
+    public ResponseEntity<?> createLine(@RequestBody LineDTO model) {
         try{
-            LineaDTO modelSaved = modelService.guardar(model);
+            LineDTO modelSaved = modelService.guardar(model);
 
             if (modelSaved == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -138,23 +138,23 @@ public class LineController {
         if (model == null){
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         }
-        model.setDenominacion(modelRecibido.denominacion);
+        model.setDenomination(modelRecibido.denomination);
         modelService.guardar(model);
         return ResponseEntity.ok(model);
     }*/
 
     @PutMapping("/line/{id}")
     public ResponseEntity<?> updateLine(@PathVariable Integer id,
-                                            @RequestBody LineaDTO modelRecibido){
+                                            @RequestBody LineDTO modelRecibido){
         try{
-            LineaDTO existingModelDTO = modelService.buscarPorId(id);
+            LineDTO existingModelDTO = modelService.buscarPorId(id);
 
             if (existingModelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This line does not exist");
             }
 
-            LineaDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            LineDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
 
             if(updatedModelDTO == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -185,7 +185,7 @@ public class LineController {
     public ResponseEntity<?> deleteLine(@PathVariable Integer id){
 
         try{
-            LineaDTO modelDTO = modelService.buscarPorId(id);
+            LineDTO modelDTO = modelService.buscarPorId(id);
 
             if (modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

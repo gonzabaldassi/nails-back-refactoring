@@ -32,7 +32,7 @@ public class ServiceItem implements Serializable {
 
     @NotNull(message = "Price can not be null")
     @Column(columnDefinition = "DOUBLE")
-    private Double precio;
+    private Double price;
 
     @NotNull(message = "The serviceType can not be empty")
     @ManyToOne

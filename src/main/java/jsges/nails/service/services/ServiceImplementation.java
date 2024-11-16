@@ -1,5 +1,5 @@
 package jsges.nails.service.services;
-import jsges.nails.dto.services.ServicioDTO;
+import jsges.nails.dto.services.ServiceDTO;
 import jsges.nails.repository.services.ServiceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +47,11 @@ public class ServiceImplementation implements IServiceService {
 
 
     @Override
-    public Page<ServicioDTO> findPaginated(Pageable pageable, List<ServicioDTO> listado) {
+    public Page<ServiceDTO> findPaginated(Pageable pageable, List<ServiceDTO> listado) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<ServicioDTO> list;
+        List<ServiceDTO> list;
         if (listado.size() < startItem) {
             list = Collections.emptyList();
         } else {
@@ -59,8 +59,8 @@ public class ServiceImplementation implements IServiceService {
             list = listado.subList(startItem, toIndex);
         }
 
-        Page<ServicioDTO> bookPage
-                = new PageImpl<ServicioDTO>(list, PageRequest.of(currentPage, pageSize), listado.size());
+        Page<ServiceDTO> bookPage
+                = new PageImpl<ServiceDTO>(list, PageRequest.of(currentPage, pageSize), listado.size());
 
         return bookPage;
     }

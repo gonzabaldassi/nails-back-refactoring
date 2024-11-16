@@ -1,6 +1,6 @@
 package jsges.nails.service.items;
 
-import jsges.nails.dto.items.LineaDTO;
+import jsges.nails.dto.items.LineDTO;
 import jsges.nails.domain.items.Line;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,10 +20,10 @@ public interface ILineService {
     public List<Line> listar(String consulta);
     public Page<Line> getLineas(Pageable pageable);
 
-    public Page<LineaDTO> findPaginated(Pageable pageable,List<LineaDTO> lineas);
+    public Page<LineDTO> findPaginated(Pageable pageable, List<LineDTO> lineas);
 
 
     public List<Line> buscar(String consulta);
 
-    public Line newModel(LineaDTO model);
+    public Line newModel(LineDTO model);
 }

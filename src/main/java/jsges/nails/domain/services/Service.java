@@ -10,6 +10,8 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -42,6 +44,9 @@ public class Service implements Serializable {
         @ManyToOne
         @JoinColumn(name = "fk_customer", referencedColumnName = "id")
         private Customer customer;
+
+        @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<ServiceItem> serviceItems = new ArrayList<>();
 
 
         /*@Id

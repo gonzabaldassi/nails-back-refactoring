@@ -31,7 +31,7 @@ public class Line extends ObjectType implements Serializable {
     //private Integer id;
 
     //@Column(columnDefinition = "TEXT")
-    //String denominacion;
+    //String denomination;
     //int estado;
 
     //@Column(columnDefinition = "TEXT")
@@ -43,11 +43,11 @@ public class Line extends ObjectType implements Serializable {
 
     public Line(String nombre) {
 
-        this.setDenominacion(nombre);
+        this.setDenomination(nombre);
     }
 
     public Line(LineaDTO model) {
-        this.setDenominacion(model.denominacion);
+        this.setDenomination(model.denomination);
 
     }*/
 }

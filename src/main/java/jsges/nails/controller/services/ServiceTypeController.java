@@ -1,7 +1,7 @@
 package jsges.nails.controller.services;
 
 
-import jsges.nails.dto.services.TipoServicioDTO;
+import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
 import jsges.nails.service.services.IServiceTypeService;
 import org.slf4j.Logger;
@@ -57,7 +57,7 @@ public class ServiceTypeController {
     public ResponseEntity<?> getServiceTypeById(@PathVariable Integer id){
         try{
 
-            TipoServicioDTO modelDTO = modelService.buscarPorId(id);
+            ServiceTypeDTO modelDTO = modelService.buscarPorId(id);
 
             if(modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -82,9 +82,9 @@ public class ServiceTypeController {
     public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "${max_page}") int size) {
         try{
-            List<TipoServicioDTO> tipoServicios = modelService.listar(consulta);
+            List<ServiceTypeDTO> tipoServicios = modelService.listar(consulta);
 
-            Page<TipoServicioDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),tipoServicios);
+            Page<ServiceTypeDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),tipoServicios);
             return ResponseEntity.ok().body(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -95,10 +95,10 @@ public class ServiceTypeController {
 
     /*@PostMapping("/tiposServicios")
     public  ResponseEntity<TipoServicio>  agregar(@RequestBody TipoServicioDTO model){
-        List<TipoServicio> list = modelService.buscar(model.denominacion);
+        List<TipoServicio> list = modelService.buscar(model.denomination);
         if (!list.isEmpty()){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
-           // throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la denominacion: " + model.denominacion);
+           // throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la denomination: " + model.denomination);
         }
 
         TipoServicio nuevoModelo = modelService.newModel(model);
@@ -106,9 +106,9 @@ public class ServiceTypeController {
     }*/
 
     @PostMapping("/serviceType")
-    public ResponseEntity<?> createServiceType(@RequestBody TipoServicioDTO model){
+    public ResponseEntity<?> createServiceType(@RequestBody ServiceTypeDTO model){
         try {
-            TipoServicioDTO modelSaved = modelService.guardar(model);
+            ServiceTypeDTO modelSaved = modelService.guardar(model);
 
             if (modelSaved == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -133,9 +133,9 @@ public class ServiceTypeController {
     }*/
 
     @PutMapping("/serviceType/{id}")
-    public ResponseEntity<?> updateServiceType(@RequestBody TipoServicioDTO modelRecibido, @PathVariable Integer id){
+    public ResponseEntity<?> updateServiceType(@RequestBody ServiceTypeDTO modelRecibido, @PathVariable Integer id){
         try{
-            TipoServicioDTO existingModelDTO = modelService.buscarPorId(id);
+            ServiceTypeDTO existingModelDTO = modelService.buscarPorId(id);
 
             if (existingModelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -170,7 +170,7 @@ public class ServiceTypeController {
     @DeleteMapping("/serviceType/{id}")
     public ResponseEntity<?> deleteServiceType(@PathVariable Integer id){
         try{
-            TipoServicioDTO modelDTO = modelService.buscarPorId(id);
+            ServiceTypeDTO modelDTO = modelService.buscarPorId(id);
 
             if (modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

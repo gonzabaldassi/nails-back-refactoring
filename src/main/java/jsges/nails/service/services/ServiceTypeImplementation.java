@@ -1,5 +1,5 @@
 package jsges.nails.service.services;
-import jsges.nails.dto.services.TipoServicioDTO;
+import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
 import jsges.nails.repository.services.TipoServicioRepository;
 import org.slf4j.Logger;
@@ -40,9 +40,9 @@ public class ServiceTypeImplementation implements IServiceTypeService {
 
 
     @Override
-    public ServiceType newModel(TipoServicioDTO modelDTO) {
+    public ServiceType newModel(ServiceTypeDTO modelDTO) {
         ServiceType model =  new ServiceType();
-        model.setDenominacion(modelDTO.denominacion);
+        model.setDenominacion(modelDTO.denomination);
         return guardar(model);
     }
 

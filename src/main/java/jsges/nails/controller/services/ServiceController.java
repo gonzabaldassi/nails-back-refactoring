@@ -1,5 +1,5 @@
 package jsges.nails.controller.services;
-import jsges.nails.dto.services.ServicioDTO;
+import jsges.nails.dto.services.ServiceDTO;
 import jsges.nails.service.services.IServiceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,7 +78,7 @@ public class ServiceController {
     @GetMapping("/service/{id}")
     public ResponseEntity<?> getServiceById(@PathVariable Integer id) {
         try{
-            ServicioDTO modelDTO = modelService.buscarPorId(id);
+            ServiceDTO modelDTO = modelService.buscarPorId(id);
 
             if(modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -108,9 +108,9 @@ public class ServiceController {
     public ResponseEntity<?> getItems((@RequestParam(defaultValue = "") String consulta,@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "${max_page}") int size) {
         try {
-            List<ServicioDTO> services = modelService.listar(consulta);
+            List<ServiceDTO> services = modelService.listar(consulta);
 
-            Page<ServicioDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), services);
+            Page<ServiceDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), services);
             return ResponseEntity.ok(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -147,9 +147,9 @@ public class ServiceController {
     }*/
 
     @PostMapping("/service")
-    public ResponseEntity<?> createService(@RequestBody ServicioDTO model) {
+    public ResponseEntity<?> createService(@RequestBody ServiceDTO model) {
         try{
-            ServicioDTO modelSaved = modelService.guardar(model);
+            ServiceDTO modelSaved = modelService.guardar(model);
 
             if (modelSaved == null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -166,16 +166,16 @@ public class ServiceController {
     /*----------------------------------------------------------------------------------*/
 
     @PutMapping("/service/{id}")
-    public ResponseEntity<?> updateService(@RequestBody ServicioDTO modelRecibido, @PathVariable Integer id) {
+    public ResponseEntity<?> updateService(@RequestBody ServiceDTO modelRecibido, @PathVariable Integer id) {
         try {
-            ServicioDTO existingModelDTO = modelService.buscarPorId(id);
+            ServiceDTO existingModelDTO = modelService.buscarPorId(id);
 
             if(existingModelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This service does not exist");
             }
 
-            ServicioDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            ServiceDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
 
             if (updatedModelDTO == null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -193,7 +193,7 @@ public class ServiceController {
     @DeleteMapping("/service/{id}")
     public ResponseEntity<?> deleteService(@PathVariable Integer id) {
         try{
-            ServicioDTO modelDTO = modelService.buscarPorId(id);
+            ServiceDTO modelDTO = modelService.buscarPorId(id);
 
             if(modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

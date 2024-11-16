@@ -1,6 +1,6 @@
 package jsges.nails.service.items;
 
-import jsges.nails.dto.items.ArticuloVentaDTO;
+import jsges.nails.dto.items.SalesItemDTO;
 import jsges.nails.domain.items.SalesItem;
 import jsges.nails.repository.items.SalesItemRepository;
 import org.slf4j.Logger;
@@ -54,11 +54,11 @@ public class SalesItemImplementation implements ISalesItemService {
     }
 
     @Override
-    public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, List<ArticuloVentaDTO> listado) {
+    public Page<SalesItemDTO> findPaginated(Pageable pageable, List<SalesItemDTO> listado) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<ArticuloVentaDTO> list;
+        List<SalesItemDTO> list;
         if (listado.size() < startItem) {
             list = Collections.emptyList();
         } else {
@@ -66,8 +66,8 @@ public class SalesItemImplementation implements ISalesItemService {
             list = listado.subList(startItem, toIndex);
         }
 
-        Page<ArticuloVentaDTO> bookPage
-                = new PageImpl<ArticuloVentaDTO>(list, PageRequest.of(currentPage, pageSize), listado.size());
+        Page<SalesItemDTO> bookPage
+                = new PageImpl<SalesItemDTO>(list, PageRequest.of(currentPage, pageSize), listado.size());
 
         return bookPage;
     }

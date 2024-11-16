@@ -1,6 +1,6 @@
 package jsges.nails.controller.items;
 
-import jsges.nails.dto.items.ArticuloVentaDTO;
+import jsges.nails.dto.items.SalesItemDTO;
 import jsges.nails.service.items.ISalesItemService;
 import jsges.nails.service.items.ILineService;
 import org.slf4j.Logger;
@@ -69,7 +69,7 @@ public class SalesItemController {
     public ResponseEntity<?> getItemById(@PathVariable Integer id){
         try{
 
-            ArticuloVentaDTO modelDTO = modelService.buscarPorId(id);
+            SalesItemDTO modelDTO = modelService.buscarPorId(id);
 
             if(modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -87,9 +87,9 @@ public class SalesItemController {
     public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
                                                         @RequestParam(defaultValue = "${max_page}") int size) {
         try{
-            List<ArticuloVentaDTO> articulos = modelService.listar(consulta);
+            List<SalesItemDTO> articulos = modelService.listar(consulta);
 
-            Page<ArticuloVentaDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),articulos);
+            Page<SalesItemDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),articulos);
             return ResponseEntity.ok().body(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -105,7 +105,7 @@ public class SalesItemController {
         Integer idLinea = model.linea;
 
         ArticuloVenta newModel =  new ArticuloVenta();
-        newModel.setDenominacion(model.denominacion);
+        newModel.setDenomination(model.denomination);
         newModel.setLinea(lineaService.buscarPorId(idLinea));
 
         ArticuloVenta modelSave= modelService.guardar(newModel);
@@ -114,9 +114,9 @@ public class SalesItemController {
 */
 
     @PostMapping("/item")
-    public ResponseEntity<?> createItem(@RequestBody ArticuloVentaDTO model){
+    public ResponseEntity<?> createItem(@RequestBody SalesItemDTO model){
         try{
-            ArticuloVentaDTO modelSaved = modelService.guardar(model);
+            SalesItemDTO modelSaved = modelService.guardar(model);
 
             if (modelSaved == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -141,7 +141,7 @@ public class SalesItemController {
             throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         }
         logger.info("articulo " +model);
-        model.setDenominacion(modelRecibido.denominacion);
+        model.setDenomination(modelRecibido.denomination);
         model.setLinea(lineaService.buscarPorId(modelRecibido.linea));
         modelService.guardar(model);
         return ResponseEntity.ok(model);
@@ -150,17 +150,17 @@ public class SalesItemController {
      */
 
     @PutMapping("/item/{id}")
-    public ResponseEntity<?> updateItem(@RequestBody ArticuloVentaDTO modelRecibido, @PathVariable Integer id){
+    public ResponseEntity<?> updateItem(@RequestBody SalesItemDTO modelRecibido, @PathVariable Integer id){
         try{
 
-            ArticuloVentaDTO existingModelDTO = modelService.buscarPorId(id);
+            SalesItemDTO existingModelDTO = modelService.buscarPorId(id);
 
             if(existingModelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This item does not exist");
             }
 
-            ArticuloVentaDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            SalesItemDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
 
             if(updatedModelDTO == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -192,7 +192,7 @@ public class SalesItemController {
     public ResponseEntity<?> deleteItem(@PathVariable Integer id){
 
         try{
-            ArticuloVentaDTO modelDTO = modelService.buscarPorId(id);
+            SalesItemDTO modelDTO = modelService.buscarPorId(id);
 
             if (modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

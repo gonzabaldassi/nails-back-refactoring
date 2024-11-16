@@ -1,23 +1,38 @@
 package jsges.nails.service.items;
 
-import jsges.nails.dto.items.LineaDTO;
-import jsges.nails.domain.items.Line;
+import jsges.nails.dto.items.LineDTO;
+import jsges.nails.mapper.items.LineMapper;
 import jsges.nails.repository.items.LineRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LineImplementation implements ILineService {
 
+    @Autowired
+    private LineRepository modelRepository;
+
+    @Autowired
+    private LineMapper lineMapper;
+
+    @Override
+    public List<LineDTO> listar(){
+        return modelRepository.buscarNoEliminados()
+                .stream()
+                .map(lineMapper::convertLineToDto)
+                .collect(Collectors.toList());
+    }
+
+
+
+
+
+
+
+    /*
     @Autowired
     private LineRepository modelRepository;
     private static final Logger logger = LoggerFactory.getLogger(LineImplementation.class);
@@ -87,5 +102,5 @@ public class LineImplementation implements ILineService {
 
         return bookPage;
     }
-
+    */
 }

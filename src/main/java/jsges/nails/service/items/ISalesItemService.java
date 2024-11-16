@@ -1,6 +1,6 @@
 package jsges.nails.service.items;
 
-import jsges.nails.dto.items.ArticuloVentaDTO;
+import jsges.nails.dto.items.SalesItemDTO;
 import jsges.nails.domain.items.SalesItem;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,5 +21,5 @@ public interface ISalesItemService {
 
     public Page<SalesItem> getArticulos(Pageable pageable);
 
-    public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, List<ArticuloVentaDTO> list);
+    public Page<SalesItemDTO> findPaginated(Pageable pageable, List<SalesItemDTO> list);
 }

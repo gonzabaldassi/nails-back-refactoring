@@ -1,6 +1,6 @@
 package jsges.nails.service.organization;
 
-import jsges.nails.dto.organization.ClienteDTO;
+import jsges.nails.dto.organization.CustomerDTO;
 import jsges.nails.domain.organization.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +20,5 @@ public interface ICustomerService {
 
     public Page<Customer> getClientes(Pageable pageable);
 
-    public Page<ClienteDTO> findPaginated(Pageable pageable, List<ClienteDTO> clientes);
+    public Page<CustomerDTO> findPaginated(Pageable pageable, List<CustomerDTO> clientes);
 }

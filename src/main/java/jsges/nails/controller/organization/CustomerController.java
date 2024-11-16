@@ -1,6 +1,6 @@
 package jsges.nails.controller.organization;
 
-import jsges.nails.dto.organization.ClienteDTO;
+import jsges.nails.dto.organization.CustomerDTO;
 import jsges.nails.service.organization.ICustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +62,7 @@ public class CustomerController {
     @GetMapping("/customer/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Integer id){
         try{
-            ClienteDTO modelDTO = modelService.buscarPorId(id);
+            CustomerDTO modelDTO = modelService.buscarPorId(id);
 
             if (modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -93,9 +93,9 @@ public class CustomerController {
                                       @RequestParam(defaultValue = "${max_page}") int size) {
 
         try {
-            List<ClienteDTO> clientes = modelService.listar(consulta);
+            List<CustomerDTO> clientes = modelService.listar(consulta);
 
-            Page<ClienteDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), clientes);
+            Page<CustomerDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), clientes);
             return ResponseEntity.ok().body(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -111,9 +111,9 @@ public class CustomerController {
     }     */
 
     @PostMapping("/customer")
-    public ResponseEntity<?> createCustomer(@RequestBody ClienteDTO model){
+    public ResponseEntity<?> createCustomer(@RequestBody CustomerDTO model){
         try{
-            ClienteDTO modelSaved = modelService.guardar(model);
+            CustomerDTO modelSaved = modelService.guardar(model);
 
             if (modelSaved == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -141,16 +141,16 @@ public class CustomerController {
     }*/
 
     @PutMapping("/customer/{id}")
-    public ResponseEntity<?> updateCustomer(@RequestBody ClienteDTO modelRecibido, @PathVariable Integer id){
+    public ResponseEntity<?> updateCustomer(@RequestBody CustomerDTO modelRecibido, @PathVariable Integer id){
         try{
-            ClienteDTO existingModelDTO = modelService.buscarPorId(id);
+            CustomerDTO existingModelDTO = modelService.buscarPorId(id);
 
             if (existingModelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This customer does not exist");
             }
 
-            ClienteDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            CustomerDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
 
             if(updatedModelDTO == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -179,7 +179,7 @@ public class CustomerController {
     public ResponseEntity<?> deleteCustomer(@PathVariable Integer id){
 
         try {
-            ClienteDTO modelDTO = modelService.buscarPorId(id);
+            CustomerDTO modelDTO = modelService.buscarPorId(id);
 
             if (modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)

@@ -1,6 +1,6 @@
 package jsges.nails.service.services;
 
-import jsges.nails.dto.services.ServicioDTO;
+import jsges.nails.dto.services.ServiceDTO;
 import jsges.nails.domain.services.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +14,7 @@ public interface IServiceService {
 
     public Service guardar(Service model);
 
-    public Page<ServicioDTO> findPaginated(Pageable pageable,List<ServicioDTO> servicios);
+    public Page<ServiceDTO> findPaginated(Pageable pageable, List<ServiceDTO> servicios);
 
     public Page<Service> getServicios(Pageable pageable);
 

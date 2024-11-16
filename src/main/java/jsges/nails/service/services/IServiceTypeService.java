@@ -1,6 +1,6 @@
 package jsges.nails.service.services;
 
-import jsges.nails.dto.services.TipoServicioDTO;
+import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,5 +26,5 @@ public interface IServiceTypeService {
 
     public List<ServiceType> buscar(String consulta);
 
-    public ServiceType newModel(TipoServicioDTO model);
+    public ServiceType newModel(ServiceTypeDTO model);
 }

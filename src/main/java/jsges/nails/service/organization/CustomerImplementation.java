@@ -1,6 +1,6 @@
 package jsges.nails.service.organization;
 
-import jsges.nails.dto.organization.ClienteDTO;
+import jsges.nails.dto.organization.CustomerDTO;
 import jsges.nails.domain.organization.Customer;
 import jsges.nails.repository.organization.CustomerRepository;
 import org.slf4j.Logger;
@@ -50,11 +50,11 @@ public class CustomerImplementation implements ICustomerService {
         return customerRepository.findAll(pageable);
     }
 
-    public Page<ClienteDTO> findPaginated(Pageable pageable, List<ClienteDTO> clientes) {
+    public Page<CustomerDTO> findPaginated(Pageable pageable, List<CustomerDTO> clientes) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<ClienteDTO> list;
+        List<CustomerDTO> list;
         if (clientes.size() < startItem) {
             list = Collections.emptyList();
         } else {
@@ -62,8 +62,8 @@ public class CustomerImplementation implements ICustomerService {
             list = clientes.subList(startItem, toIndex);
         }
 
-        Page<ClienteDTO> bookPage
-                = new PageImpl<ClienteDTO>(list, PageRequest.of(currentPage, pageSize), clientes.size());
+        Page<CustomerDTO> bookPage
+                = new PageImpl<CustomerDTO>(list, PageRequest.of(currentPage, pageSize), clientes.size());
 
         return bookPage;
     }
