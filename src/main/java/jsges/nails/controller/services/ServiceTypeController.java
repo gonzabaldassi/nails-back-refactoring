@@ -1,9 +1,9 @@
 package jsges.nails.controller.services;
 
 
-import jsges.nails.dto.servicios.TipoServicioDTO;
+import jsges.nails.dto.services.TipoServicioDTO;
 import jsges.nails.domain.services.ServiceType;
-import jsges.nails.service.servicios.ITipoServicioService;
+import jsges.nails.service.services.IServiceTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class ServiceTypeController {
     private static final Logger logger = LoggerFactory.getLogger(ServiceTypeController.class);
 
     @Autowired
-    private ITipoServicioService modelService;
+    private IServiceTypeService modelService;
 
 
     /*public TipoServicioController() {

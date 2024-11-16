@@ -1,6 +1,6 @@
 package jsges.nails.controller.services;
-import jsges.nails.dto.servicios.ServicioDTO;
-import jsges.nails.service.servicios.IServicioService;
+import jsges.nails.dto.services.ServicioDTO;
+import jsges.nails.service.services.IServiceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class ServiceController {
 
 
     @Autowired
-    private IServicioService modelService;
+    private IServiceService modelService;
 
     /*@Autowired
     private IClienteService clienteService;
