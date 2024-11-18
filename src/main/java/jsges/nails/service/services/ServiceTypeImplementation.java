@@ -1,7 +1,7 @@
 package jsges.nails.service.services;
 import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
-import jsges.nails.repository.services.TipoServicioRepository;
+import jsges.nails.repository.services.ServiceTypeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.List;
 public class ServiceTypeImplementation implements IServiceTypeService {
 
     @Autowired
-    private TipoServicioRepository modelRepository;
+    private ServiceTypeRepository modelRepository;
     private static final Logger logger = LoggerFactory.getLogger(ServiceTypeImplementation.class);
 
     @Override

@@ -1,5 +1,6 @@
 package jsges.nails.controller.organization;
 
+import jsges.nails.domain.organization.Customer;
 import jsges.nails.dto.organization.CustomerDTO;
 import jsges.nails.service.organization.ICustomerService;
 import org.slf4j.Logger;
@@ -44,7 +45,7 @@ public class CustomerController {
     @GetMapping("/customer")
     public ResponseEntity<?> getCustomer(){
         try {
-            return ResponseEntity.ok(modelService.listar());
+            return ResponseEntity.ok(modelService.getModels());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error listing customers: " + e.getMessage());
@@ -62,7 +63,7 @@ public class CustomerController {
     @GetMapping("/customer/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Integer id){
         try{
-            CustomerDTO modelDTO = modelService.buscarPorId(id);
+            CustomerDTO modelDTO = modelService.getModelById(id);
 
             if (modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -89,13 +90,13 @@ public class CustomerController {
     }*/
 
     @GetMapping("/customerPageQuery")
-    public ResponseEntity<?> getItems (@RequestParam(defaultValue = "") String consulta,@RequestParam(defaultValue = "0") int page,
-                                      @RequestParam(defaultValue = "${max_page}") int size) {
+    public ResponseEntity<?> getItems (@RequestParam(defaultValue = "") String request, @RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "${max_page}") int size) {
 
         try {
-            List<CustomerDTO> clientes = modelService.listar(consulta);
+            List<CustomerDTO> customers = modelService.getModelByRequest(request);
 
-            Page<CustomerDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), clientes);
+            Page<CustomerDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), customers);
             return ResponseEntity.ok().body(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -111,9 +112,9 @@ public class CustomerController {
     }     */
 
     @PostMapping("/customer")
-    public ResponseEntity<?> createCustomer(@RequestBody CustomerDTO model){
+    public ResponseEntity<?> createCustomer(@RequestBody Customer model){
         try{
-            CustomerDTO modelSaved = modelService.guardar(model);
+            CustomerDTO modelSaved = modelService.createModel(model);
 
             if (modelSaved == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -141,16 +142,16 @@ public class CustomerController {
     }*/
 
     @PutMapping("/customer/{id}")
-    public ResponseEntity<?> updateCustomer(@RequestBody CustomerDTO modelRecibido, @PathVariable Integer id){
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer receivedModel, @PathVariable Integer id){
         try{
-            CustomerDTO existingModelDTO = modelService.buscarPorId(id);
+            CustomerDTO existingModelDTO = modelService.getModelById(id);
 
             if (existingModelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This customer does not exist");
             }
 
-            CustomerDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            CustomerDTO updatedModelDTO = modelService.updateModel(existingModelDTO, receivedModel);
 
             if(updatedModelDTO == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -179,14 +180,14 @@ public class CustomerController {
     public ResponseEntity<?> deleteCustomer(@PathVariable Integer id){
 
         try {
-            CustomerDTO modelDTO = modelService.buscarPorId(id);
+            CustomerDTO modelDTO = modelService.getModelById(id);
 
             if (modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("The customer with id:" + id + ", doesnt exist");
             }
 
-            modelService.eliminar(modelDTO);
+            modelService.deleteModel(modelDTO);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

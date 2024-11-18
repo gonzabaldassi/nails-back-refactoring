@@ -1,4 +1,5 @@
 package jsges.nails.controller.items;
+import jsges.nails.domain.items.Line;
 import jsges.nails.dto.items.LineDTO;
 import jsges.nails.service.items.ILineService;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class LineController {
     @GetMapping({"/line"})
     public ResponseEntity<?> getLines(){
         try {
-            return ResponseEntity.ok(modelService.listar());
+            return ResponseEntity.ok(modelService.getModels());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error showing the lines:" + e.getMessage());
@@ -60,7 +61,7 @@ public class LineController {
     public ResponseEntity<?> getLineById(@PathVariable Integer id){
         try{
 
-            LineDTO modelDTO = modelService.buscarPorId(id);
+            LineDTO modelDTO = modelService.getModelById(id);
 
             if (modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -88,13 +89,13 @@ public class LineController {
     }*/
 
     @GetMapping({"/linePageQuery"})
-    public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
-                                                   @RequestParam(defaultValue = "${max_page}") int size) {
+    public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String request, @RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "${max_page}") int size) {
 
         try{
-            List<LineDTO> lineas = modelService.listar(consulta);
+            List<LineDTO> lines = modelService.getModelByRequest(request);
 
-            Page<LineDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),lineas);
+            Page<LineDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),lines);
             return ResponseEntity.ok().body(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -114,9 +115,9 @@ public class LineController {
     }*/
 
     @PostMapping("/line")
-    public ResponseEntity<?> createLine(@RequestBody LineDTO model) {
+    public ResponseEntity<?> createLine(@RequestBody Line model) {
         try{
-            LineDTO modelSaved = modelService.guardar(model);
+            LineDTO modelSaved = modelService.createModel(model);
 
             if (modelSaved == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -145,16 +146,16 @@ public class LineController {
 
     @PutMapping("/line/{id}")
     public ResponseEntity<?> updateLine(@PathVariable Integer id,
-                                            @RequestBody LineDTO modelRecibido){
+                                            @RequestBody Line receivedModel){
         try{
-            LineDTO existingModelDTO = modelService.buscarPorId(id);
+            LineDTO existingModelDTO = modelService.getModelById(id);
 
             if (existingModelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This line does not exist");
             }
 
-            LineDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            LineDTO updatedModelDTO = modelService.updateModel(existingModelDTO, receivedModel);
 
             if(updatedModelDTO == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -185,14 +186,14 @@ public class LineController {
     public ResponseEntity<?> deleteLine(@PathVariable Integer id){
 
         try{
-            LineDTO modelDTO = modelService.buscarPorId(id);
+            LineDTO modelDTO = modelService.getModelById(id);
 
             if (modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("The line with id: " + id + ", does not exist");
             }
 
-            modelService.eliminar(modelDTO);
+            modelService.deleteModel(modelDTO);
 
             return ResponseEntity.ok().build();
         } catch (Exception e) {

@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TipoServicioRepository extends JpaRepository<ServiceType, Integer> {
+public interface ServiceTypeRepository extends JpaRepository<ServiceType, Integer> {
 
     @Query("select p from ServiceType p  where p.estado=0 order by p.denominacion")
     List<ServiceType> buscarNoEliminados();

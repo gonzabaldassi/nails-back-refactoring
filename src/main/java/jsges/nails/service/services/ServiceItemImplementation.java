@@ -1,7 +1,7 @@
 package jsges.nails.service.services;
 
 import jsges.nails.domain.services.ServiceItem;
-import jsges.nails.repository.services.ItemServicioRepository;
+import jsges.nails.repository.services.ServiceItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class ServiceItemImplementation implements IServiceItemService {
 
 
     @Autowired
-    private ItemServicioRepository modelRepository;
+    private ServiceItemRepository modelRepository;
     private final Logger log = LoggerFactory.getLogger(ServiceItemImplementation.class);
 
     @Override

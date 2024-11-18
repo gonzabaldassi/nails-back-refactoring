@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServiceDTO {
+public class ServiceClassDTO {
 
     private Integer id;
     private Timestamp registrationTimestamp;

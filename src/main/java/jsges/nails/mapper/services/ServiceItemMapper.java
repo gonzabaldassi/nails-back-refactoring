@@ -2,10 +2,12 @@ package jsges.nails.mapper.services;
 
 import jsges.nails.domain.services.ServiceItem;
 import jsges.nails.dto.services.ServiceItemDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ServiceItemMapper {
 
-    public ServiceItemDTO convertServiceItemToDto(ServiceItem serviceItem) {
+    public ServiceItemDTO convertModelToDto(ServiceItem serviceItem) {
         ServiceItemDTO serviceItemDTO = new ServiceItemDTO();
 
         serviceItemDTO.setId(serviceItem.getId());
@@ -17,15 +19,4 @@ public class ServiceItemMapper {
 
         return serviceItemDTO;
     }
-
-    /*public ServiceItem convertDtoToServiceItem(ServiceItemDTO serviceItemDTO) {
-        ServiceItem serviceItem = new ServiceItem();
-
-        serviceItem.setId(serviceItemDTO.getId());
-        serviceItem.setObservation(serviceItemDTO.getObservation());
-        serviceItem.setPrice(serviceItemDTO.getPrice());
-
-        serviceItem.setServiceType();
-        serviceItem.setService();
-    }*/
 }

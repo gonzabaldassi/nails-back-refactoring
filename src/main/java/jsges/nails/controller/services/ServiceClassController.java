@@ -1,6 +1,7 @@
 package jsges.nails.controller.services;
-import jsges.nails.dto.services.ServiceDTO;
-import jsges.nails.service.services.IServiceService;
+import jsges.nails.domain.services.ServiceClass;
+import jsges.nails.dto.services.ServiceClassDTO;
+import jsges.nails.service.services.IServiceClassService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value="${path_mapping}")
 @CrossOrigin(value="${path_cross}")
-public class ServiceController {
-    private static final Logger logger = LoggerFactory.getLogger(ServiceController.class);
+public class ServiceClassController {
+    private static final Logger logger = LoggerFactory.getLogger(ServiceClassController.class);
 
 
     @Autowired
-    private IServiceService modelService;
+    private IServiceClassService modelService;
 
     /*@Autowired
     private IClienteService clienteService;
@@ -54,7 +55,7 @@ public class ServiceController {
     @GetMapping("/service")
     public ResponseEntity<?> getService() {
         try {
-            return ResponseEntity.ok(modelService.listar());
+            return ResponseEntity.ok(modelService.getModels());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error listing services: " + e.getMessage());
@@ -78,7 +79,7 @@ public class ServiceController {
     @GetMapping("/service/{id}")
     public ResponseEntity<?> getServiceById(@PathVariable Integer id) {
         try{
-            ServiceDTO modelDTO = modelService.buscarPorId(id);
+            ServiceClassDTO modelDTO = modelService.getModelById(id);
 
             if(modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -105,12 +106,12 @@ public class ServiceController {
     }*/
 
     @GetMapping("/servicePageQuery")
-    public ResponseEntity<?> getItems((@RequestParam(defaultValue = "") String consulta,@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<?> getItems(@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "${max_page}") int size) {
         try {
-            List<ServiceDTO> services = modelService.listar(consulta);
+            List<ServiceClassDTO> services = modelService.getModels();
 
-            Page<ServiceDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), services);
+            Page<ServiceClassDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size), services);
             return ResponseEntity.ok(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -147,9 +148,9 @@ public class ServiceController {
     }*/
 
     @PostMapping("/service")
-    public ResponseEntity<?> createService(@RequestBody ServiceDTO model) {
+    public ResponseEntity<?> createService(@RequestBody ServiceClass model) {
         try{
-            ServiceDTO modelSaved = modelService.guardar(model);
+            ServiceClassDTO modelSaved = modelService.createModel(model);
 
             if (modelSaved == null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -165,17 +166,17 @@ public class ServiceController {
 
     /*----------------------------------------------------------------------------------*/
 
-    @PutMapping("/service/{id}")
-    public ResponseEntity<?> updateService(@RequestBody ServiceDTO modelRecibido, @PathVariable Integer id) {
+    /*@PutMapping("/service/{id}")
+    public ResponseEntity<?> updateService(@RequestBody ServiceClass modelRecibido, @PathVariable Integer id) {
         try {
-            ServiceDTO existingModelDTO = modelService.buscarPorId(id);
+            ServiceClassDTO existingModelDTO = modelService.getModelById(id);
 
             if(existingModelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This service does not exist");
             }
 
-            ServiceDTO updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            ServiceClassDTO updatedModelDTO = modelService.updateModel(existingModelDTO, modelRecibido);
 
             if (updatedModelDTO == null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -187,20 +188,20 @@ public class ServiceController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error updating service: " + e.getMessage());
         }
-    }
+    }*/
 
 
     @DeleteMapping("/service/{id}")
     public ResponseEntity<?> deleteService(@PathVariable Integer id) {
         try{
-            ServiceDTO modelDTO = modelService.buscarPorId(id);
+            ServiceClassDTO modelDTO = modelService.getModelById(id);
 
             if(modelDTO == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("The service with id:" + id + " does not exist");
             }
 
-            modelService.eliminar(modelDTO);
+            modelService.deleteModel(modelDTO);
 
             return ResponseEntity.ok().build();
         } catch (Exception e) {

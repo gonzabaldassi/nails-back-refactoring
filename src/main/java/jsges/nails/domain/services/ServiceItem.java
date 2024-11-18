@@ -28,7 +28,7 @@ public class ServiceItem implements Serializable {
     private String observation;
 
     @Column(columnDefinition = "INTEGER")
-    private Integer state;
+    private Integer state = 0;
 
     @NotNull(message = "Price can not be null")
     @Column(columnDefinition = "DOUBLE")
@@ -42,7 +42,7 @@ public class ServiceItem implements Serializable {
     @NotNull(message = "The service can not be empty")
     @ManyToOne
     @JoinColumn(name = "fk_service", referencedColumnName = "id")
-    private Service service;
+    private ServiceClass service;
 
         /*@ManyToOne(cascade = CascadeType.ALL)
     private TipoServicio tipoServicio;

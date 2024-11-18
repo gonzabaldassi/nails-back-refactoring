@@ -20,7 +20,7 @@ import java.util.List;
 @ToString
 
 @Table(name = "Service")
-public class Service implements Serializable {
+public class ServiceClass implements Serializable {
 
         @Id
         @Column(name = "id")
@@ -28,7 +28,7 @@ public class Service implements Serializable {
         private Integer id;
 
         @Column(columnDefinition = "INTEGER")
-        private Integer state;
+        private Integer state = 0;
 
         @Column(columnDefinition = "DATE")
         private Timestamp registrationTimestamp;

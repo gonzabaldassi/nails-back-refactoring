@@ -1,18 +1,20 @@
 package jsges.nails.mapper.services;
 
-import jsges.nails.domain.services.Service;
-import jsges.nails.dto.services.ServiceDTO;
+import jsges.nails.domain.services.ServiceClass;
+import jsges.nails.dto.services.ServiceClassDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-public class ServiceMapper {
+@Component
+public class ServiceClassMapper {
 
     @Autowired
     private ServiceItemMapper serviceItemMapper;
 
-    public ServiceDTO convertServiceToDTO(Service service) {
-        ServiceDTO serviceDTO = new ServiceDTO();
+    public ServiceClassDTO convertModelToDto(ServiceClass service) {
+        ServiceClassDTO serviceDTO = new ServiceClassDTO();
 
         serviceDTO.setId(service.getId());
         serviceDTO.setRegistrationTimestamp(service.getRegistrationTimestamp());
@@ -24,21 +26,8 @@ public class ServiceMapper {
 
         serviceDTO.setServiceItems(service.getServiceItems()
                 .stream()
-                .map(serviceItemMapper::convertServiceItemToDto)
+                .map(serviceItemMapper::convertModelToDto)
                 .collect(Collectors.toList()));
         return serviceDTO;
     }
-
-    /*public Service convertDTOToService(ServiceDTO serviceDTO) {
-        Service service = new Service();
-
-        service.setId(serviceDTO.getId());
-        service.setRegistrationTimestamp(serviceDTO.getRegistrationTimestamp());
-        service.setCompletionTimestamp(serviceDTO.getCompletionTimestamp());
-        service.setTotal(serviceDTO.getTotal());
-
-        service.setCustomer();
-
-        service.setServiceItems();
-    }*/
 }

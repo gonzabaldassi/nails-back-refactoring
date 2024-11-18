@@ -27,7 +27,7 @@ public class SalesItem implements Serializable {
         private String denomination;
 
         @Column(columnDefinition = "INTEGER")
-        private Integer state;
+        private Integer state = 0;
 
         @NotNull(message = "Observation can not be null")
         @Column(columnDefinition = "TEXT")

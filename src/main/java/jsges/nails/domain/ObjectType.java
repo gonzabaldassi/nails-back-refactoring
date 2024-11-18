@@ -26,7 +26,7 @@ public class ObjectType implements Serializable {
         private String denomination;
 
         @Column(columnDefinition = "INTEGER")
-        private Integer state;
+        private Integer state = 0;
 
         @Column(columnDefinition = "TEXT")
         private String detail;

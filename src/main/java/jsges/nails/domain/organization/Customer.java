@@ -2,8 +2,7 @@ package jsges.nails.domain.organization;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jsges.nails.domain.items.SalesItem;
-import jsges.nails.domain.services.Service;
+import jsges.nails.domain.services.ServiceClass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,7 @@ public class Customer implements Serializable {
         private String businessName;
 
         @Column(columnDefinition = "INTEGER")
-        private Integer state;
+        private Integer state = 0;
 
         @Column(columnDefinition = "TEXT")
         private String letter;
@@ -57,7 +56,7 @@ public class Customer implements Serializable {
         private Date startDate;
 
         @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
-        private List<Service> services = new ArrayList<>();
+        private List<ServiceClass> services = new ArrayList<>();
 
         /*String razonSocial;
         int estado;

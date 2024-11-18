@@ -2,10 +2,12 @@ package jsges.nails.mapper.organization;
 
 import jsges.nails.domain.organization.Customer;
 import jsges.nails.dto.organization.CustomerDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CustomerMapper {
 
-    public CustomerDTO convertCustomerToDto(Customer customer) {
+    public CustomerDTO convertModelToDto(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
 
         customerDTO.setId(customer.getId());
@@ -18,20 +20,5 @@ public class CustomerMapper {
         customerDTO.setDateOfBirth(customer.getDateOfBirth());
 
         return customerDTO;
-    }
-
-    public Customer convertDtoToCustomer(CustomerDTO customerDTO) {
-        Customer customer = new Customer();
-
-        customer.setId(customerDTO.getId());
-        customer.setBusinessName(customerDTO.getBusinessName());
-        customer.setLetter(customerDTO.getLetter());
-        customer.setContact(customerDTO.getContact());
-        customer.setPhoneNumber(customerDTO.getPhoneNumber());
-        customer.setEmail(customerDTO.getEmail());
-        customer.setStartDate(customerDTO.getStartDate());
-        customer.setDateOfBirth(customerDTO.getDateOfBirth());
-
-        return customer;
     }
 }

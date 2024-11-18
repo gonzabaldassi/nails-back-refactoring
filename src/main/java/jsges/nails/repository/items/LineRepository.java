@@ -9,15 +9,11 @@ import java.util.List;
 
 public interface LineRepository extends JpaRepository<Line, Integer> {
 
-    @Query("select p from Line p  where p.estado=0 order by p.denominacion")
-    List<Line> buscarNoEliminados();
+    @Query("select p from Line p  where p.state=0 order by p.denomination")
+    List<Line> findByState0();
 
+    @Query("SELECT p FROM Line p WHERE p.state = 0 AND  p.denomination LIKE:request ORDER BY p.denomination")
+    List<Line> findByRequest(@Param("request") String request);
 
-    @Query("SELECT p FROM Line p WHERE p.estado = 0 AND  p.denominacion LIKE %:consulta% ORDER BY p.denominacion")
-    List<Line> buscarNoEliminados(@Param("consulta") String consulta);
-
-    @Query("SELECT p FROM Line p WHERE p.estado = 0 AND  p.denominacion LIKE:consulta ORDER BY p.denominacion")
-    List<Line> buscarExacto(@Param("consulta") String consulta);
-
-    List<Line> findByDenominacionContaining(String consulta);
+    Line findByIdAndState(Integer id, Integer state);
 }

@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ItemServicioRepository extends JpaRepository<ServiceItem, Integer> {
+public interface ServiceItemRepository extends JpaRepository<ServiceItem, Integer> {
 
     @Query("select p from ServiceItem p  where p.estado=0 ")
     List<ServiceItem> buscarNoEliminados();

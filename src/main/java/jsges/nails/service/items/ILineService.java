@@ -9,21 +9,21 @@ import java.util.List;
 
 public interface ILineService {
 
-    public List<Line> listar();
+    public List<LineDTO> getModels();
 
-    public Line buscarPorId(Integer id);
+    public LineDTO getModelById(Integer id);
 
-    public Line guardar(Line model);
+    public List<LineDTO> getModelByRequest(String request);
 
-    public void eliminar(Line model);
+    public Page<LineDTO> findPaginated(Pageable pageable, List<LineDTO> lines);
 
-    public List<Line> listar(String consulta);
-    public Page<Line> getLineas(Pageable pageable);
+    public LineDTO createModel(Line model);
 
-    public Page<LineDTO> findPaginated(Pageable pageable, List<LineDTO> lineas);
+    public LineDTO updateModel(LineDTO editedModelDTO, Line newModel);
 
+    public void deleteModel(LineDTO model);
 
-    public List<Line> buscar(String consulta);
+    public Integer verifyCode(Integer code);
 
-    public Line newModel(LineDTO model);
+    public Integer verifyCode(Integer code, Integer id);
 }
