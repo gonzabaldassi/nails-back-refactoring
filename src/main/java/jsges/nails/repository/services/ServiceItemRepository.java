@@ -8,15 +8,12 @@ import java.util.List;
 
 public interface ServiceItemRepository extends JpaRepository<ServiceItem, Integer> {
 
-    @Query("select p from ServiceItem p  where p.estado=0 ")
-    List<ServiceItem> buscarNoEliminados();
+    @Query("select p from ServiceItem p  where p.state=0 ")
+    List<ServiceItem> findByState0();
 
+    @Query("SELECT p FROM ServiceItem p WHERE p.state = 0 AND p.service.id = :idService")
+    List<ServiceItem> findByService(@Param("idService") Integer idService);
 
-
-    @Query("SELECT p FROM ServiceItem p WHERE p.estado = 0 ")
-    List<ServiceItem> buscarExacto();
-
-    @Query("SELECT p FROM ServiceItem p WHERE p.estado = 0 AND p.servicio.id = :idServicio")
-    List<ServiceItem> buscarPorServicio(@Param("idServicio") Integer idServicio);
+    ServiceItem findByIdAndState(Integer id, Integer state);
 }
 

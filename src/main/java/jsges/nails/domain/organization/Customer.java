@@ -55,7 +55,7 @@ public class Customer implements Serializable {
         @Column(columnDefinition = "DATE")
         private Date startDate;
 
-        @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
+        @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
         private List<ServiceClass> services = new ArrayList<>();
 
         /*String razonSocial;

@@ -84,6 +84,7 @@ public class CustomerImplementation implements ICustomerService {
         Integer verification = verifyBusinessName(normalizedName);
 
         if(verification == null) {
+            model.setBusinessName(normalizedName);
             Customer newModel = modelRepository.save(model);
             return modelMapper.convertModelToDto(newModel);
         }
@@ -161,6 +162,7 @@ public class CustomerImplementation implements ICustomerService {
         Customer existingModel = modelRepository.findById(model.getId()).orElse(null);
         if (existingModel != null) {
             existingModel.setState(1);
+            modelRepository.save(existingModel);
         }
     }
 

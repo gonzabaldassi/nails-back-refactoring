@@ -1,6 +1,5 @@
 package jsges.nails.repository.items;
 
-import jsges.nails.domain.items.Line;
 import jsges.nails.domain.items.SalesItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +16,4 @@ public interface SalesItemRepository extends JpaRepository<SalesItem, Integer> {
     List<SalesItem> findByRequest(@Param("request") String request);
 
     SalesItem findByIdAndState(Integer id, Integer state);
-
-
 }

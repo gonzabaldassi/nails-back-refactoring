@@ -1,5 +1,6 @@
 package jsges.nails.service.services;
 
+import jsges.nails.dto.items.SalesItemDTO;
 import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
 import org.springframework.data.domain.Page;
@@ -9,22 +10,17 @@ import java.util.List;
 
 public interface IServiceTypeService {
 
-    public List<ServiceType> listar();
+    public List<ServiceTypeDTO> getModels();
 
-    public ServiceType buscarPorId(Integer id);
+    public ServiceTypeDTO getModelById(Integer id);
 
-    public ServiceType guardar(ServiceType model);
+    public List<ServiceTypeDTO> getModelByRequest(String request);
 
-    public void eliminar(ServiceType model);
+    public Page<ServiceTypeDTO> findPaginated(Pageable pageable, List<ServiceTypeDTO> models);
 
-    public List<ServiceType> listar(String consulta);
+    public ServiceTypeDTO createModel(ServiceType model);
 
-    public Page<ServiceType> getTiposServicios(Pageable pageable);
+    public ServiceTypeDTO updateModel(ServiceTypeDTO editedModelDTO, ServiceType newModel);
 
-    public Page<ServiceType> findPaginated(Pageable pageable, List<ServiceType> serviceTypes);
-
-
-    public List<ServiceType> buscar(String consulta);
-
-    public ServiceType newModel(ServiceTypeDTO model);
+    public void deleteModel(ServiceTypeDTO model);
 }

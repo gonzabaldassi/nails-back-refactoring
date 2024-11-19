@@ -8,15 +8,11 @@ import java.util.List;
 
 public interface ServiceTypeRepository extends JpaRepository<ServiceType, Integer> {
 
-    @Query("select p from ServiceType p  where p.estado=0 order by p.denominacion")
-    List<ServiceType> buscarNoEliminados();
+    @Query("select p from ServiceType p  where p.state=0 order by p.denomination")
+    List<ServiceType> findByState0();
 
+    @Query("SELECT p FROM ServiceType p WHERE p.state = 0 AND  p.denomination LIKE:request ORDER BY p.denomination")
+    List<ServiceType> findByRequest(@Param("request") String request);
 
-    @Query("SELECT p FROM ServiceType p WHERE p.estado = 0 AND  p.denominacion LIKE %:consulta% ORDER BY p.denominacion")
-    List<ServiceType> buscarNoEliminados(@Param("consulta") String consulta);
-
-    @Query("SELECT p FROM ServiceType p WHERE p.estado = 0 AND  p.denominacion LIKE:consulta ORDER BY p.denominacion")
-    List<ServiceType> buscarExacto(@Param("consulta") String consulta);
-
-    List<ServiceType> findByDenominacionContaining(String consulta);
+    ServiceType findByIdAndState(Integer id, Integer state);
 }

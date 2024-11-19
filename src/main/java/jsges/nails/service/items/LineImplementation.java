@@ -139,6 +139,7 @@ public class LineImplementation implements ILineService {
         Line existingModel = modelRepository.findById(model.getId()).orElse(null);
         if (existingModel != null) {
             existingModel.setState(1);
+            modelRepository.save(existingModel);
         }
     }
 

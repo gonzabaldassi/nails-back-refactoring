@@ -4,8 +4,6 @@ package jsges.nails.controller.services;
 import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
 import jsges.nails.service.services.IServiceTypeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +17,6 @@ import java.util.List;
 @RequestMapping(value="${path_mapping}")
 @CrossOrigin(value="${path_cross}")
 public class ServiceTypeController {
-    private static final Logger logger = LoggerFactory.getLogger(ServiceTypeController.class);
 
     @Autowired
     private IServiceTypeService modelService;
@@ -38,7 +35,7 @@ public class ServiceTypeController {
     @GetMapping("/serviceType")
     public ResponseEntity<?> getServiceType(){
         try {
-            return ResponseEntity.ok(modelService.listar());
+            return ResponseEntity.ok(modelService.getModels());
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error listing service types:"+e.getMessage());
@@ -57,7 +54,7 @@ public class ServiceTypeController {
     public ResponseEntity<?> getServiceTypeById(@PathVariable Integer id){
         try{
 
-            ServiceTypeDTO modelDTO = modelService.buscarPorId(id);
+            ServiceTypeDTO modelDTO = modelService.getModelById(id);
 
             if(modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -79,12 +76,12 @@ public class ServiceTypeController {
     }*/
 
     @GetMapping("/serviceTypePageQuery")
-    public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String request, @RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "${max_page}") int size) {
         try{
-            List<ServiceTypeDTO> tipoServicios = modelService.listar(consulta);
+            List<ServiceTypeDTO> serviceType = modelService.getModelByRequest(request);
 
-            Page<ServiceTypeDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),tipoServicios);
+            Page<ServiceTypeDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),serviceType);
             return ResponseEntity.ok().body(bookPage);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -106,9 +103,9 @@ public class ServiceTypeController {
     }*/
 
     @PostMapping("/serviceType")
-    public ResponseEntity<?> createServiceType(@RequestBody ServiceTypeDTO model){
+    public ResponseEntity<?> createServiceType(@RequestBody ServiceType model){
         try {
-            ServiceTypeDTO modelSaved = modelService.guardar(model);
+            ServiceTypeDTO modelSaved = modelService.createModel(model);
 
             if (modelSaved == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -133,16 +130,16 @@ public class ServiceTypeController {
     }*/
 
     @PutMapping("/serviceType/{id}")
-    public ResponseEntity<?> updateServiceType(@RequestBody ServiceTypeDTO modelRecibido, @PathVariable Integer id){
+    public ResponseEntity<?> updateServiceType(@RequestBody ServiceType modelRecibido, @PathVariable Integer id){
         try{
-            ServiceTypeDTO existingModelDTO = modelService.buscarPorId(id);
+            ServiceTypeDTO existingModelDTO = modelService.getModelById(id);
 
             if (existingModelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("This service type does not exist");
             }
 
-            ServiceType updatedModelDTO = modelService.update(existingModelDTO, modelRecibido);
+            ServiceTypeDTO updatedModelDTO = modelService.updateModel(existingModelDTO, modelRecibido);
 
             if(updatedModelDTO == null){
                 return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -170,14 +167,14 @@ public class ServiceTypeController {
     @DeleteMapping("/serviceType/{id}")
     public ResponseEntity<?> deleteServiceType(@PathVariable Integer id){
         try{
-            ServiceTypeDTO modelDTO = modelService.buscarPorId(id);
+            ServiceTypeDTO modelDTO = modelService.getModelById(id);
 
             if (modelDTO == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body("The service type with id " + id + " does not exist");
             }
 
-            modelService.eliminar(modelDTO);
+            modelService.deleteModel(modelDTO);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

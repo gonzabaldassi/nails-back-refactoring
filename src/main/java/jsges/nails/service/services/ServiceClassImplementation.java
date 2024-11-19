@@ -103,9 +103,12 @@ public class ServiceClassImplementation implements IServiceClassService {
     public void deleteModel(ServiceClassDTO model){
         ServiceClass existingModel = modelRepository.findById(model.getId()).orElse(null);
         if (existingModel != null) {
+            for (ServiceItem serviceItem: existingModel.getServiceItems()){
+                serviceItemImplementation.deleteModel(serviceItem.getId());
+            }
             existingModel.setState(1);
+            modelRepository.save(existingModel);
         }
-
     }
 
 
