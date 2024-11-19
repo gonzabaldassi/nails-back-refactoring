@@ -37,23 +37,5 @@ public class SalesItem implements Serializable {
         @ManyToOne
         @JoinColumn(name = "fk_line", referencedColumnName = "id")
         private Line line;
-
-        /*@Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;*/
-
-        /*@Column(columnDefinition = "TEXT")
-        String denomination;
-        int estado;*/
-
-        /*@ManyToOne(cascade = CascadeType.ALL)
-        private Linea linea;*/
-
-        /*
-        public void asEliminado() {
-               this.setEstado(1);
-        }*/
-
-        ///LOS ATRIBUTOS NO ESTABAN DEFINIDOS COMO PRIVATE, NO RESPETA ENCAPSULAMIENTO
 }
 

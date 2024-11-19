@@ -1,7 +1,5 @@
 package jsges.nails.service.services;
 
-import jsges.nails.domain.items.SalesItem;
-import jsges.nails.dto.items.SalesItemDTO;
 import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
 import jsges.nails.mapper.services.ServiceTypeMapper;
@@ -107,77 +105,4 @@ public class ServiceTypeImplementation implements IServiceTypeService {
             modelRepository.save(existingModel);
         }
     }
-
-    /*
-    @Autowired
-    private ServiceTypeRepository modelRepository;
-    private static final Logger logger = LoggerFactory.getLogger(ServiceTypeImplementation.class);
-
-    @Override
-    public List<ServiceType> listar() {
-        return modelRepository.buscarNoEliminados();
-    }
-
-    @Override
-    public ServiceType buscarPorId(Integer id) {
-        return modelRepository.findById(id).orElse(null);
-    }
-
-
-
-    @Override
-    public ServiceType guardar(ServiceType model) {
-        return modelRepository.save(model);
-    }
-
-
-    @Override
-    public ServiceType newModel(ServiceTypeDTO modelDTO) {
-        ServiceType model =  new ServiceType();
-        model.setDenominacion(modelDTO.denomination);
-        return guardar(model);
-    }
-
-
-    @Override
-    public void eliminar(ServiceType model) {
-
-        modelRepository.save(model);
-    }
-
-    @Override
-    public List<ServiceType> listar(String consulta) {
-        //logger.info("service " +consulta);
-        return modelRepository.buscarNoEliminados(consulta);
-    }
-
-    @Override
-    public Page<ServiceType> getTiposServicios(Pageable pageable) {
-        return  modelRepository.findAll(pageable);
-    }
-
-    public List<ServiceType> buscar(String consulta) {
-        return modelRepository.buscarExacto(consulta);
-    }
-
-
-    @Override
-    public Page<ServiceType> findPaginated(Pageable pageable, List<ServiceType>lineas) {
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<ServiceType> list;
-        if (lineas.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, lineas.size());
-            list = lineas.subList(startItem, toIndex);
-        }
-
-        Page<ServiceType> bookPage
-                = new PageImpl<ServiceType>(list, PageRequest.of(currentPage, pageSize), lineas.size());
-
-        return bookPage;
-    }*/
-
 }

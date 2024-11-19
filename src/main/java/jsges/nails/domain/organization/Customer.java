@@ -58,21 +58,4 @@ public class Customer implements Serializable {
         @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
         private List<ServiceClass> services = new ArrayList<>();
 
-        /*String razonSocial;
-        int estado;
-
-        @Column(columnDefinition = "TEXT")
-        String letra;
-
-        @Column(columnDefinition = "TEXT")
-        String contacto;
-
-        @Column(columnDefinition = "TEXT")
-        String celular;
-        @Column(columnDefinition = "TEXT")
-        String mail;
-
-        Date fechaInicio;
-        Date fechaNacimiento;*/
-
 }

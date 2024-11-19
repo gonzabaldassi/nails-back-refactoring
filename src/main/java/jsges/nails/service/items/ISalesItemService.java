@@ -1,7 +1,5 @@
 package jsges.nails.service.items;
 
-import jsges.nails.domain.items.Line;
-import jsges.nails.dto.items.LineDTO;
 import jsges.nails.dto.items.SalesItemDTO;
 import jsges.nails.domain.items.SalesItem;
 import org.springframework.data.domain.Page;
@@ -24,19 +22,4 @@ public interface ISalesItemService {
     public SalesItemDTO updateModel(SalesItemDTO editedModelDTO, SalesItem newModel);
 
     public void deleteModel(SalesItemDTO model);
-
-
-    /*public List<SalesItem> listar();
-
-    public SalesItem buscarPorId(Integer id);
-
-    public SalesItem guardar(SalesItem model);
-
-    public void eliminar(SalesItem model);
-
-    public List<SalesItem> listar(String consulta);
-
-    public Page<SalesItem> getArticulos(Pageable pageable);
-
-    public Page<SalesItemDTO> findPaginated(Pageable pageable, List<SalesItemDTO> list);*/
 }

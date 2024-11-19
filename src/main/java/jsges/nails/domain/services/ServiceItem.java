@@ -43,39 +43,4 @@ public class ServiceItem implements Serializable {
     @ManyToOne
     @JoinColumn(name = "fk_service", referencedColumnName = "id")
     private ServiceClass service;
-
-        /*@ManyToOne(cascade = CascadeType.ALL)
-    private TipoServicio tipoServicio;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Servicio servicio;*/
-
-    /*public void asEliminado() {
-        this.setEstado(1);
-    }*/
-
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ItemServicio that = (ItemServicio) o;
-        return estado == that.estado && Objects.equals(id, that.id) && Objects.equals(observacion, that.observacion) && Objects.equals(tipoServicio, that.tipoServicio) && Objects.equals(servicio, that.servicio);
-    }*/
-
-    /*@Override
-    public int hashCode() {
-        return Objects.hash(id, estado, observacion, tipoServicio, servicio);
-    }*/
-
-    /*public ItemServicio() {
-    }*/
-
-    /*public ItemServicio(Service service, ServiceType tipo, Double precio, String observacion) {
-        this.servicio = service;
-        this.tipoServicio = tipo;
-        this.precio = precio;
-        this.observacion=observacion;
-    }*/
-
 }

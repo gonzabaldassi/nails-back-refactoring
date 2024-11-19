@@ -24,31 +24,5 @@ public class Line extends ObjectType implements Serializable {
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SalesItem> salesItems = new ArrayList<>();
-
-
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Integer id;
-
-    //@Column(columnDefinition = "TEXT")
-    //String denomination;
-    //int estado;
-
-    //@Column(columnDefinition = "TEXT")
-    //String observacion;
-
-    /*public Line() {
-        // Constructor por defecto necesario para JPA
-    }
-
-    public Line(String nombre) {
-
-        this.setDenomination(nombre);
-    }
-
-    public Line(LineaDTO model) {
-        this.setDenomination(model.denomination);
-
-    }*/
 }
 

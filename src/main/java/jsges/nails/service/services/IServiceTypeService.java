@@ -1,6 +1,5 @@
 package jsges.nails.service.services;
 
-import jsges.nails.dto.items.SalesItemDTO;
 import jsges.nails.dto.services.ServiceTypeDTO;
 import jsges.nails.domain.services.ServiceType;
 import org.springframework.data.domain.Page;

@@ -47,22 +47,4 @@ public class ServiceClass implements Serializable {
 
         @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<ServiceItem> serviceItems = new ArrayList<>();
-
-
-        /*@Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
-
-        private int estado;
-
-        @ManyToOne(cascade = CascadeType.ALL)
-        private Customer customer;
-
-        private Timestamp fechaRegistro;
-        private Timestamp fechaRealizacion;
-        private double total;
-
-        public Service() { }*/
-
-
 }

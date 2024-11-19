@@ -17,27 +17,13 @@ import java.util.List;
 @RequestMapping(value="${path_mapping}")
 @CrossOrigin(value="${path_cross}")
 public class LineController {
-    private static final Logger logger = LoggerFactory.getLogger(LineController.class);
+
     @Autowired
     private ILineService modelService;
 
-    /*public LineaController() {
-
-    }*/
-    /*
-    @GetMapping({"/lineas"})
-    public List<Linea> getAll() {
-        logger.info("enta en  traer todas las lineas");
-        List<LineaDTO> listadoDTO    =  new ArrayList<>();
-        List<Linea>  list    = modelService.listar();
-        list.forEach((model) -> {
-            listadoDTO.add(new LineaDTO(model));
-        });
-        return list;
-    }*/
 
     @GetMapping({"/line"})
-    public ResponseEntity<?> getLines(){
+    public ResponseEntity<?> getLine(){
         try {
             return ResponseEntity.ok(modelService.getModels());
         } catch (Exception e) {
@@ -45,17 +31,6 @@ public class LineController {
                     .body("Error showing the lines:" + e.getMessage());
         }
     }
-
-    /*
-    @GetMapping("/linea/{id}")
-    public ResponseEntity<LineaDTO> getLineById(@PathVariable Integer id){
-        Linea linea = modelService.buscarPorId(id);
-        if(linea == null){
-            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
-        }
-        LineaDTO model = new LineaDTO(linea);
-        return ResponseEntity.ok(model);
-    }*/
 
     @GetMapping("/line/{id}")
     public ResponseEntity<?> getLineById(@PathVariable Integer id){
@@ -74,20 +49,6 @@ public class LineController {
         }
     }
 
-    /*
-    @GetMapping({"/lineasPageQuery"})
-    public ResponseEntity<Page<LineaDTO>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
-                                                @RequestParam(defaultValue = "${max_page}") int size) {
-        List<LineaDTO> listadoDTO    =  new ArrayList<>();
-        List<Linea> listado = modelService.listar(consulta);
-         listado.forEach((model) -> {
-            listadoDTO.add(new LineaDTO(model));
-         });
-
-        Page<LineaDTO> bookPage = modelService.findPaginated(PageRequest.of(page, size),listadoDTO);
-        return ResponseEntity.ok().body(bookPage);
-    }*/
-
     @GetMapping({"/linePageQuery"})
     public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String request, @RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "${max_page}") int size) {
@@ -102,17 +63,6 @@ public class LineController {
                     .body("Error showing lines"+e.getMessage());
         }
     }
-
-    /*
-    @PostMapping("/linea")
-    public  ResponseEntity<Linea> agregar(@RequestBody LineaDTO model){
-        List<Linea> list = modelService.buscar(model.denomination);
-        if (!list.isEmpty()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
-        Linea nuevaLinea = modelService.newModel(model);
-        return ResponseEntity.ok(nuevaLinea);
-    }*/
 
     @PostMapping("/line")
     public ResponseEntity<?> createLine(@RequestBody Line model) {
@@ -130,19 +80,6 @@ public class LineController {
                     .body("Error adding line" + e.getMessage());
         }
     }
-
-    /*
-    @PutMapping("/linea/{id}")
-    public ResponseEntity<Linea> actualizar(@PathVariable Integer id,
-                                            @RequestBody LineaDTO modelRecibido){
-        Linea model = modelService.buscarPorId(modelRecibido.id);
-        if (model == null){
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-        }
-        model.setDenomination(modelRecibido.denomination);
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
-    }*/
 
     @PutMapping("/line/{id}")
     public ResponseEntity<?> updateLine(@PathVariable Integer id,
@@ -168,19 +105,6 @@ public class LineController {
                     .body("Error updating line" + e.getMessage());
         }
     }
-
-    /*
-    @PutMapping("/lineaEliminar/{id}")
-    public ResponseEntity<Linea> eliminar(@PathVariable Integer id){
-        Linea model = modelService.buscarPorId(id);
-        if (model == null){
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-        }
-
-        model.asEliminado();
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
-    }*/
 
     @DeleteMapping("/line/{id}")
     public ResponseEntity<?> deleteLine(@PathVariable Integer id){

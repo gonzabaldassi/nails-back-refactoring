@@ -1,5 +1,4 @@
 package jsges.nails.dto.items;
-import jsges.nails.dto.ObjectTypeDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SalesItemDTO extends ObjectTypeDTO {
+public class SalesItemDTO {
 
+    private Integer id;
+    private String denomination;
     private Integer lineId;
 
 }

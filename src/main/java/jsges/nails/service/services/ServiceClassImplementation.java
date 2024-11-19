@@ -2,7 +2,6 @@ package jsges.nails.service.services;
 import jsges.nails.domain.services.ServiceClass;
 import jsges.nails.domain.services.ServiceItem;
 import jsges.nails.dto.services.ServiceClassDTO;
-import jsges.nails.dto.services.ServiceItemDTO;
 import jsges.nails.mapper.services.ServiceClassMapper;
 import jsges.nails.repository.services.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,26 +78,6 @@ public class ServiceClassImplementation implements IServiceClassService {
         return modelMapper.convertModelToDto(newModel);
     }
 
-    /*
-    @Override
-    public ServiceClassDTO updateModel(ServiceClassDTO editedModelDTO, ServiceClass newModel){
-        ServiceClass editedModel = modelRepository.findById(editedModelDTO.getId()).orElse(null);
-
-        if (editedModel == null) {
-            return null;
-        }
-
-        editedModel.setTotal(newModel.getTotal());
-        editedModel.setServiceItems(newModel.getServiceItems());
-        editedModel.setRegistrationTimestamp(newModel.getRegistrationTimestamp());
-        editedModel.setCompletionTimestamp(newModel.getCompletionTimestamp());
-        editedModel.setCustomer(newModel.getCustomer());
-
-        ServiceClass updatedModel = modelRepository.save(editedModel);
-
-        return modelMapper.convertModelToDto(updatedModel);
-    }*/
-
     @Override
     public void deleteModel(ServiceClassDTO model){
         ServiceClass existingModel = modelRepository.findById(model.getId()).orElse(null);
@@ -110,60 +89,4 @@ public class ServiceClassImplementation implements IServiceClassService {
             modelRepository.save(existingModel);
         }
     }
-
-
-    /*
-    @Autowired
-    private ServiceRepository modelRepository;
-    private static final Logger logger = LoggerFactory.getLogger(ServiceImplementation.class);
-
-    @Override
-    public List<Service> listar() {
-        return modelRepository.buscarNoEliminados();
-    }
-
-    @Override
-    public Service buscarPorId(Integer id) {
-        return modelRepository.findById(id).orElse(null);
-    }
-
-
-    @Override
-    public Service guardar(Service model) {
-        return modelRepository.save(model);
-    }
-
-
-    @Override
-    public Page<Service> getServicios(Pageable pageable) {
-        return  modelRepository.findAll(pageable);
-    }
-
-
-
-    @Override
-    public Page<ServiceDTO> findPaginated(Pageable pageable, List<ServiceDTO> listado) {
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<ServiceDTO> list;
-        if (listado.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, listado.size());
-            list = listado.subList(startItem, toIndex);
-        }
-
-        Page<ServiceDTO> bookPage
-                = new PageImpl<ServiceDTO>(list, PageRequest.of(currentPage, pageSize), listado.size());
-
-        return bookPage;
-    }
-
-    @Override
-    public List<Service> listar(String consulta) {
-        //logger.info("service " +consulta);
-        return modelRepository.buscarNoEliminados(consulta);
-    }
-*/
 }

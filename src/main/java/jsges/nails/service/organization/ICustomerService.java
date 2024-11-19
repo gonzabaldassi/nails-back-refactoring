@@ -1,7 +1,5 @@
 package jsges.nails.service.organization;
 
-import jsges.nails.domain.items.Line;
-import jsges.nails.dto.items.LineDTO;
 import jsges.nails.dto.organization.CustomerDTO;
 import jsges.nails.domain.organization.Customer;
 import org.springframework.data.domain.Page;
@@ -28,19 +26,4 @@ public interface ICustomerService {
     public Integer verifyBusinessName(String businessName);
 
     public Integer verifyBusinessName(String businessName,Integer id);
-
-
-    /*public List<Customer> listar();
-
-    public Customer buscarPorId(Integer id);
-
-    public Customer guardar(Customer customer);
-
-    public void eliminar(Customer customer);
-
-      public List<Customer> listar(String consulta);
-
-    public Page<Customer> getClientes(Pageable pageable);
-
-    public Page<CustomerDTO> findPaginated(Pageable pageable, List<CustomerDTO> clientes);*/
 }

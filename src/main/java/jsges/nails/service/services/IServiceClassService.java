@@ -20,18 +20,4 @@ public interface IServiceClassService {
     /*public ServiceClassDTO updateModel(ServiceClassDTO editedModelDTO, ServiceClass newModel);*/
 
     public void deleteModel(ServiceClassDTO model);
-
-
-    /*public List<Service> listar();
-
-    public Service buscarPorId(Integer id);
-
-    public Service guardar(Service model);
-
-    public Page<ServiceDTO> findPaginated(Pageable pageable, List<ServiceDTO> servicios);
-
-    public Page<Service> getServicios(Pageable pageable);
-
-    public List<Service> listar(String consulta);*/
-
 }

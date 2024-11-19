@@ -20,27 +20,9 @@ import java.util.List;
 @CrossOrigin(value="${path_cross}")
 
 public class CustomerController {
-    private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
-
-    /*@Autowired
-    private IClienteService clienteServicio;*/
 
     @Autowired
     private ICustomerService modelService;
-
-    /*public ClienteControlador() {
-    }*/
-
-    /*@GetMapping({"/clientes"})
-    public List<ClienteDTO> getAll() {
-        List<ClienteDTO> listadoDTO    =  new ArrayList<>();
-        List<Cliente> list = this.clienteServicio.listar();
-
-        list.forEach((model) -> {
-            listadoDTO.add(new ClienteDTO(model));
-        });
-        return listadoDTO;
-    }*/
 
     @GetMapping("/customer")
     public ResponseEntity<?> getCustomer(){
@@ -51,14 +33,6 @@ public class CustomerController {
                     .body("Error listing customers: " + e.getMessage());
         }
     }
-
-    /*@GetMapping("/cliente/{id}")
-    public ResponseEntity<Cliente> getPorId(@PathVariable Integer id){
-        Cliente cliente = clienteServicio.buscarPorId(id);
-        if(cliente == null)
-            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
-        return ResponseEntity.ok(cliente);
-    }*/
 
     @GetMapping("/customer/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Integer id){
@@ -76,19 +50,6 @@ public class CustomerController {
         }
     }
 
-    /*
-    @GetMapping({"/clientesPageQuery"})
-    public ResponseEntity<Page<ClienteDTO>> getItems(@RequestParam(defaultValue = "") String consulta,@RequestParam(defaultValue = "0") int page,
-                                                  @RequestParam(defaultValue = "${max_page}") int size) {
-        List<Cliente> listado = clienteServicio.listar(consulta);
-        List<ClienteDTO> listadoDTO    =  new ArrayList<>();
-        listado.forEach((model) -> {
-            listadoDTO.add(new ClienteDTO(model));
-        });
-        Page<ClienteDTO> bookPage = clienteServicio.findPaginated(PageRequest.of(page, size),listadoDTO);
-        return ResponseEntity.ok().body(bookPage);
-    }*/
-
     @GetMapping("/customerPageQuery")
     public ResponseEntity<?> getItems (@RequestParam(defaultValue = "") String request, @RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "${max_page}") int size) {
@@ -103,13 +64,6 @@ public class CustomerController {
                     .body("Error listing customers: " + e.getMessage());
         }
     }
-
-
-    /*@PostMapping("/clientes")
-    public Cliente agregar(@RequestBody Cliente cliente){
-       // logger.info("Cliente a agregar: " + cliente);
-        return clienteServicio.guardar(cliente);
-    }     */
 
     @PostMapping("/customer")
     public ResponseEntity<?> createCustomer(@RequestBody Customer model){
@@ -127,19 +81,6 @@ public class CustomerController {
                     .body("Error creating customer: " + e.getMessage());
         }
     }
-
-    /*@PutMapping("/clientes/{id}")
-    public ResponseEntity<Cliente> actualizar(@PathVariable Integer id,
-                                              @RequestBody Cliente modelRecibido){
-        Cliente model = clienteServicio.buscarPorId(id);
-        if (model == null)
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-
-
-
-        clienteServicio.guardar(modelRecibido);
-        return ResponseEntity.ok(modelRecibido);
-    }*/
 
     @PutMapping("/customer/{id}")
     public ResponseEntity<?> updateCustomer(@RequestBody Customer receivedModel, @PathVariable Integer id){
@@ -163,18 +104,6 @@ public class CustomerController {
                     .body("Error updating customer: " + e.getMessage());
         }
     }
-
-    /*@PutMapping("/clienteEliminar/{id}")
-    public ResponseEntity<Cliente> eliminar(@PathVariable Integer id){
-        Cliente model = clienteServicio.buscarPorId(id);
-        if (model == null)
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-
-        model.setEstado(1);
-
-        clienteServicio.guardar(model);
-        return ResponseEntity.ok(model);
-    }*/
 
     @DeleteMapping("/customer/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Integer id){

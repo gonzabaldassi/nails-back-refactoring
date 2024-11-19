@@ -21,17 +21,6 @@ public class ServiceTypeController {
     @Autowired
     private IServiceTypeService modelService;
 
-
-    /*public TipoServicioController() {
-
-    }*/
-
-    /*@GetMapping({"/tiposServicios"})
-    public List<TipoServicio> getAll() {
-        List<TipoServicio> tipoServicios = this.modelService.listar();
-        return tipoServicios;
-    }*/
-
     @GetMapping("/serviceType")
     public ResponseEntity<?> getServiceType(){
         try {
@@ -41,14 +30,6 @@ public class ServiceTypeController {
                     .body("Error listing service types:"+e.getMessage());
         }
     }
-
-       /* @GetMapping("/tiposServicios/{id}")
-    public ResponseEntity<TipoServicio> getPorId(@PathVariable Integer id){
-        TipoServicio cliente = modelService.buscarPorId(id);
-        if(cliente == null)
-            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
-        return ResponseEntity.ok(cliente);
-    }*/
 
     @GetMapping("/serviceType/{id})")
     public ResponseEntity<?> getServiceTypeById(@PathVariable Integer id){
@@ -67,14 +48,6 @@ public class ServiceTypeController {
         }
     }
 
-    /*@GetMapping({"/tiposServiciosPageQuery"})
-    public ResponseEntity<Page<TipoServicio>> getItems(@RequestParam(defaultValue = "") String consulta, @RequestParam(defaultValue = "0") int page,
-                                                @RequestParam(defaultValue = "${max_page}") int size) {
-        List<TipoServicio> listado = modelService.listar(consulta);
-        Page<TipoServicio> bookPage = modelService.findPaginated(PageRequest.of(page, size),listado);
-        return ResponseEntity.ok().body(bookPage);
-    }*/
-
     @GetMapping("/serviceTypePageQuery")
     public ResponseEntity<?> getItems(@RequestParam(defaultValue = "") String request, @RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "${max_page}") int size) {
@@ -88,19 +61,6 @@ public class ServiceTypeController {
                     .body("Error listing service types:"+e.getMessage());
         }
     }
-
-
-    /*@PostMapping("/tiposServicios")
-    public  ResponseEntity<TipoServicio>  agregar(@RequestBody TipoServicioDTO model){
-        List<TipoServicio> list = modelService.buscar(model.denomination);
-        if (!list.isEmpty()){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-           // throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la denomination: " + model.denomination);
-        }
-
-        TipoServicio nuevoModelo = modelService.newModel(model);
-        return ResponseEntity.ok(nuevoModelo);
-    }*/
 
     @PostMapping("/serviceType")
     public ResponseEntity<?> createServiceType(@RequestBody ServiceType model){
@@ -117,17 +77,6 @@ public class ServiceTypeController {
                     .body("Error creating service type: " + e.getMessage());
         }
     }
-
-    /*@PutMapping("/tiposServicios/{id}")
-    public ResponseEntity<TipoServicio> actualizar(@PathVariable Integer id,
-                                                   @RequestBody TipoServicio modelRecibido){
-        TipoServicio model = modelService.buscarPorId(id);
-        if (model == null)
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-
-        modelService.guardar(modelRecibido);
-        return ResponseEntity.ok(modelRecibido);
-    }*/
 
     @PutMapping("/serviceType/{id}")
     public ResponseEntity<?> updateServiceType(@RequestBody ServiceType modelRecibido, @PathVariable Integer id){
@@ -151,18 +100,6 @@ public class ServiceTypeController {
                     .body("Error updating service type: " + e.getMessage());
         }
     }
-
-    /*@PutMapping("/tipoServicioEliminar/{id}")
-    public ResponseEntity<TipoServicio> eliminar(@PathVariable Integer id){
-        TipoServicio model = modelService.buscarPorId(id);
-        if (model == null)
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-
-        model.setEstado(1);
-
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
-    }*/
 
     @DeleteMapping("/serviceType/{id}")
     public ResponseEntity<?> deleteServiceType(@PathVariable Integer id){

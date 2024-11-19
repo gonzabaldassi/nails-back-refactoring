@@ -21,29 +21,9 @@ import static java.lang.Integer.parseInt;
 @RequestMapping(value="${path_mapping}")
 @CrossOrigin(value="${path_cross}")
 public class SalesItemController {
-    private static final Logger logger = LoggerFactory.getLogger(SalesItemController.class);
+
     @Autowired
     private ISalesItemService modelService;
-
-    @Autowired
-    private ILineService lineaService;
-
-    /*
-    public ArticuloVentaController() {
-
-    }*/
-/*
-    @GetMapping({"/articulos"})
-    public List<ArticuloVentaDTO> getAll() {
-        logger.info("enta en  traer todas los articulos");
-        List<ArticuloVenta> list = modelService.listar();
-        List<ArticuloVentaDTO> listadoDTO    =  new ArrayList<>();
-        list.forEach((model) -> {
-            listadoDTO.add(new ArticuloVentaDTO(model));
-        });
-        return listadoDTO;
-    }
-*/
 
     @GetMapping("/item")
     public ResponseEntity<?> getItem(){
@@ -54,17 +34,6 @@ public class SalesItemController {
                     .body("Error listing articles:"+e.getMessage());
         }
     }
-
-       /*
-    @GetMapping("/articulos/{id}")
-    public ResponseEntity<ArticuloVentaDTO> getPorId(@PathVariable Integer id){
-        ArticuloVenta articuloVenta = modelService.buscarPorId(id);
-        if(articuloVenta == null){
-            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
-        }
-        ArticuloVentaDTO model = new ArticuloVentaDTO(articuloVenta);
-        return ResponseEntity.ok(model);
-    }*/
 
     @GetMapping("/item/{id}")
     public ResponseEntity<?> getItemById(@PathVariable Integer id){
@@ -98,22 +67,6 @@ public class SalesItemController {
         }
     }
 
-/*
-    @PostMapping("/articulos")
-    public ArticuloVenta agregar(@RequestBody ArticuloVentaDTO model){
-        logger.info("entra" );
-
-        Integer idLinea = model.linea;
-
-        ArticuloVenta newModel =  new ArticuloVenta();
-        newModel.setDenomination(model.denomination);
-        newModel.setLinea(lineaService.buscarPorId(idLinea));
-
-        ArticuloVenta modelSave= modelService.guardar(newModel);
-        return modelSave;
-    }
-*/
-
     @PostMapping("/item")
     public ResponseEntity<?> createItem(@RequestBody SalesItem model){
         try{
@@ -130,25 +83,6 @@ public class SalesItemController {
                     .body("Error creating item:" + e.getMessage());
         }
     }
-
-    /*
-    @PutMapping("/articulos/{id}")
-    public ResponseEntity<ArticuloVenta> actualizar(@PathVariable Integer id,
-                                                    @RequestBody ArticuloVentaDTO modelRecibido){
-        logger.info("articulo " +modelRecibido);
-        ArticuloVenta model = modelService.buscarPorId(id);
-        logger.info("articulo " +model);
-        if (model == null){
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-        }
-        logger.info("articulo " +model);
-        model.setDenomination(modelRecibido.denomination);
-        model.setLinea(lineaService.buscarPorId(modelRecibido.linea));
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
-    }
-
-     */
 
     @PutMapping("/item/{id}")
     public ResponseEntity<?> updateItem(@RequestBody SalesItem receivedModel, @PathVariable Integer id){
@@ -174,20 +108,6 @@ public class SalesItemController {
                     .body("Error updating item: " + e.getMessage());
         }
     }
-
-    /*
-    @DeleteMapping("/articuloEliminar/{id}")
-    public ResponseEntity<ArticuloVenta> eliminar(@PathVariable Integer id){
-        ArticuloVenta model = modelService.buscarPorId(id);
-        if (model == null){
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-        }
-
-        model.asEliminado();
-        modelService.guardar(model);
-        return ResponseEntity.ok(model);
-    }
-*/
 
     @DeleteMapping("/item/{id}")
     public ResponseEntity<?> deleteItem(@PathVariable Integer id){
