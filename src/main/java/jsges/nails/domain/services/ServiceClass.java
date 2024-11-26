@@ -36,7 +36,6 @@ public class ServiceClass implements Serializable {
         @Column(columnDefinition = "DATE")
         private Timestamp completionTimestamp;
 
-        @NotNull(message = "Total can not be null")
         @Column(columnDefinition = "DOUBLE")
         private Double total;
 

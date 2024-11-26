@@ -39,7 +39,6 @@ public class ServiceItem implements Serializable {
     @JoinColumn(name = "fk_serviceType", referencedColumnName = "id")
     private ServiceType serviceType;
 
-    @NotNull(message = "The service can not be empty")
     @ManyToOne
     @JoinColumn(name = "fk_service", referencedColumnName = "id")
     private ServiceClass service;
