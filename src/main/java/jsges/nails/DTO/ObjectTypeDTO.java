@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class ObjectTypeDTO {
-    private Integer id;
-    private String denomination;
+    protected Integer id;
+    protected String denomination;
 }
 
 

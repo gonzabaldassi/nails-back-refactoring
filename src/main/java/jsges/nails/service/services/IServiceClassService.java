@@ -1,6 +1,6 @@
 package jsges.nails.service.services;
 
-import jsges.nails.DTO.services.ServiceClassDTO;
+import jsges.nails.dto.services.ServiceClassDTO;
 import jsges.nails.domain.services.ServiceClass;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

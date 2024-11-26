@@ -2,7 +2,6 @@ package jsges.nails.domain.items;
 
 import jakarta.persistence.*;
 import jsges.nails.domain.ObjectType;
-import jsges.nails.domain.services.ServiceItem;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -17,3 +17,4 @@ public interface LineRepository extends JpaRepository<Line, Integer> {
 
     Line findByIdAndState(Integer id, Integer state);
 }
+

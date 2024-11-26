@@ -2,6 +2,7 @@ package jsges.nails.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,18 +16,19 @@ public class ObjectType implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "objectType_id_seq")
         @SequenceGenerator(name = "objectType_id_seq", sequenceName = "objectType_id_seq", allocationSize = 1)
-        private Integer id;
+        protected Integer id;
 
+        @NotEmpty(message = "The code can not be null")
         @Column(columnDefinition = "INTEGER")
-        private Integer code;
+        protected Integer code;
 
         @NotEmpty(message = "The denomination can not be null")
         @Column(columnDefinition = "TEXT")
-        private String denomination;
+        protected String denomination;
 
         @Column(columnDefinition = "INTEGER")
-        private Integer state = 0;
+        protected Integer state = 0;
 
         @Column(columnDefinition = "TEXT")
-        private String detail;
+        protected String detail;
 }
