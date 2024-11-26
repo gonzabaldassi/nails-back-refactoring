@@ -17,7 +17,6 @@ public class ObjectType implements Serializable {
         @SequenceGenerator(name = "objectType_id_seq", sequenceName = "objectType_id_seq", allocationSize = 1)
         private Integer id;
 
-        @NotEmpty(message = "The code can not be null")
         @Column(columnDefinition = "INTEGER")
         private Integer code;
 

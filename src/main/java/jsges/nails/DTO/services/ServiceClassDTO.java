@@ -1,4 +1,4 @@
-package jsges.nails.dto.services;
+package jsges.nails.DTO.services;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jsges.nails.dto.services.ServiceItemDTO;
 
 @Data
 @AllArgsConstructor

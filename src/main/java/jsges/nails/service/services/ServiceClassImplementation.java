@@ -1,7 +1,7 @@
 package jsges.nails.service.services;
 import jsges.nails.domain.services.ServiceClass;
 import jsges.nails.domain.services.ServiceItem;
-import jsges.nails.dto.services.ServiceClassDTO;
+import jsges.nails.DTO.services.ServiceClassDTO;
 import jsges.nails.mapper.services.ServiceClassMapper;
 import jsges.nails.repository.services.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;

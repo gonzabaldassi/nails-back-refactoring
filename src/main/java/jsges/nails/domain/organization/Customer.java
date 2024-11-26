@@ -32,13 +32,13 @@ public class Customer implements Serializable {
         @Column(columnDefinition = "TEXT")
         private String businessName;
 
-        @Column(columnDefinition = "INTEGER")
+
         private Integer state = 0;
 
-        @Column(columnDefinition = "TEXT")
+
         private String letter;
 
-        @NotNull(message = "Contact can not be null")
+
         @Column(columnDefinition = "TEXT")
         private String contact;
 

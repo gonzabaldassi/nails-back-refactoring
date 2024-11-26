@@ -1,6 +1,6 @@
 package jsges.nails.controller.services;
 import jsges.nails.domain.services.ServiceClass;
-import jsges.nails.dto.services.ServiceClassDTO;
+import jsges.nails.DTO.services.ServiceClassDTO;
 import jsges.nails.service.services.IServiceClassService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
